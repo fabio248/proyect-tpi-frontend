@@ -452,7 +452,7 @@ function Home() {
         <div
           className='portfolio-modal modal fade'
           id='portfolioModal1'
-          tabindex='-1'
+          tabIndex='-1'
           role='dialog'
           aria-hidden='true'
         >
@@ -505,7 +505,7 @@ function Home() {
         <div
           className='portfolio-modal modal fade'
           id='portfolioModal2'
-          tabindex='-1'
+          tabIndex='-1'
           role='dialog'
           aria-hidden='true'
         >
@@ -559,7 +559,7 @@ function Home() {
         <div
           className='portfolio-modal modal fade'
           id='portfolioModal3'
-          tabindex='-1'
+          tabIndex='-1'
           role='dialog'
           aria-hidden='true'
         >
@@ -613,7 +613,7 @@ function Home() {
         <div
           className='portfolio-modal modal fade'
           id='portfolioModal4'
-          tabindex='-1'
+          tabIndex='-1'
           role='dialog'
           aria-hidden='true'
         >
@@ -667,7 +667,7 @@ function Home() {
         <div
           className='portfolio-modal modal fade'
           id='portfolioModal5'
-          tabindex='-1'
+          tabIndex='-1'
           role='dialog'
           aria-hidden='true'
         >
@@ -722,7 +722,7 @@ function Home() {
         <div
           className='portfolio-modal modal fade'
           id='portfolioModal6'
-          tabindex='-1'
+          tabIndex='-1'
           role='dialog'
           aria-hidden='true'
         >
