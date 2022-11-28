@@ -24,23 +24,25 @@ constructor(props) {
 
   }
 
-  iniciarSesion(event){
+  iniciarSesion(event) {
     const body = JSON.stringify(this.state)
     const url = `https://proyecto-tpi.onrender.com/api/v1/auth/login`
     event.preventDefault()
 
-    this.autenticarUsuario(url,body).then((value) => {
-      localStorage.setItem("userID",value.user.id.toString())
-      localStorage.setItem("token",value.token.toString())
+    this.autenticarUsuario(url, body).then((value) => {
+
+
+      localStorage.setItem("userID", value.user.id.toString())
+      localStorage.setItem("token", value.token.toString())
       alert(JSON.stringify(this.state))
       alert(JSON.stringify(value))
       //reemplazar por el dashboard ---------------------------------------------------------------
-      window.location.href = window.location.href.replace("login","")
-    })
-
+      window.location.href = window.location.href.replace("login", "")
+    }).catch(error => {alert("Datos de inicio de sesión incorrectos.\nVerifique que los datos ingresados sean correctos.")})
 
 
   }
+
 
   async autenticarUsuario(url,body){
 
@@ -54,7 +56,8 @@ constructor(props) {
     body:body
   })
 
-    return respuesta.json()
+
+  return respuesta.json()
 
   }
 
