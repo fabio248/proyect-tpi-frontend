@@ -1,16 +1,19 @@
 import React, {Component} from 'react';
 import logo from "/src/assets/img/logo.svg"
+import loading from "/src/assets/img/loading.gif"
 class Login extends Component {
 
 constructor(props) {
   super(props);
   this.state = {
     email:'',
-    password:''
+    password:'',
+    seAutentico:false
   }
 
   this.iniciarSesion = this.iniciarSesion.bind(this)
   this.handleInputChange = this.handleInputChange.bind(this)
+  this.esAutenticado = this.esAutenticado.bind(this)
 }
 
   handleInputChange(event){
@@ -24,8 +27,35 @@ constructor(props) {
 
   }
 
+  actualizarEstadoCompletamente(valor){
+
+    const estado = {
+      email:this.state.email,
+      password:this.state.password,
+      seAutentico:valor
+    }
+
+    console.log(estado)
+
+    this.setState(estado)
+  }
+
+  esAutenticado( event){
+
+
+    const clickInicioSesion = !this.state.seAutentico
+
+    this.actualizarEstadoCompletamente(clickInicioSesion)
+
+  }
+
   iniciarSesion(event) {
-    const body = JSON.stringify(this.state)
+    const cuerpo = {
+      email:this.state.email,
+      password: this.state.password
+    }
+
+    const body = JSON.stringify(cuerpo)
     const url = `https://proyecto-tpi.onrender.com/api/v1/auth/login`
     event.preventDefault()
 
@@ -38,7 +68,9 @@ constructor(props) {
       alert(JSON.stringify(value))
       //reemplazar por el dashboard ---------------------------------------------------------------
       window.location.href = window.location.href.replace("login", "")
-    }).catch(error => {alert("Datos de inicio de sesión incorrectos.\nVerifique que los datos ingresados sean correctos.")})
+    }).catch(error => {
+      this.actualizarEstadoCompletamente(false)
+      alert("Datos de inicio de sesión incorrectos.\nVerifique que los datos ingresados sean correctos.")})
 
 
   }
@@ -60,6 +92,7 @@ constructor(props) {
   return respuesta.json()
 
   }
+
 
 
 
@@ -104,12 +137,16 @@ constructor(props) {
                           </div>
 
                           <div className="pt-1 mb-4">
-                            <input className="btn btn-primary btn-lg btn-block" type="submit" value={"Iniciar sesión."}/>
+                            <button className="btn btn-primary  btn-lg btn-block" type="submit" onClick={this.esAutenticado}  >
+                              { (this.state.seAutentico ? <img src={loading} width={25} height={25}/> : "Iniciar Sesión.")}
+                            </button>
                           </div>
 
-                          <a className="small text-muted" href="#!">Forgot password?</a>
 
-                          <a href="#!" className="small text-muted">Terms of use.</a>
+
+
+
+
                           <a href="#!" className="small text-muted">Privacy policy</a>
                         </form>
 
@@ -120,6 +157,8 @@ constructor(props) {
               </div>
             </div>
           </div>
+
+
 
         </>
     )
