@@ -21,7 +21,7 @@ function Home() {
               aria-expanded='false'
               aria-label='Toggle navigation'
             >
-              Menu
+              Menú
               <i className='fas fa-bars ms-1'></i>
             </button>
             <div className='collapse navbar-collapse' id='navbarResponsive'>
@@ -112,7 +112,7 @@ function Home() {
                 <h4 className='my-3'>Limpieza de Prendas</h4>
                 <p className='text-muted'>
                   ¿Tienes algún traje al cual quieres devolverle su antiguo
-                  brillo?. Nosotros nos encargaremos de dejarlo comó nuevo.
+                  brillo? Nosotros nos encargaremos de dejarlo comó nuevo.
                 </p>
               </div>
             </div>
@@ -146,9 +146,9 @@ function Home() {
                     />
                   </a>
                   <div className='portfolio-caption'>
-                    <div className='portfolio-caption-heading'>Threads</div>
+                    <div className='portfolio-caption-heading'>Camiseta de Corte Entallado</div>
                     <div className='portfolio-caption-subheading text-muted'>
-                      Illustration
+                      Premium
                     </div>
                   </div>
                 </div>
@@ -172,9 +172,9 @@ function Home() {
                     />
                   </a>
                   <div className='portfolio-caption'>
-                    <div className='portfolio-caption-heading'>Explore</div>
+                    <div className='portfolio-caption-heading'>Chaqueta de Algodón</div>
                     <div className='portfolio-caption-subheading text-muted'>
-                      Graphic Design
+                      Abrigos
                     </div>
                   </div>
                 </div>
@@ -186,21 +186,21 @@ function Home() {
                     data-bs-toggle='modal'
                     href='#portfolioModal3'
                   >
-                    <div className='portfolio-hover'>
-                      <div className='portfolio-hover-content'>
-                        <i className='fas fa-plus fa-3x'></i>
-                      </div>
+                  <div className='portfolio-hover'>
+                    <div className='portfolio-hover-content'>
+                      <i className='fas fa-plus fa-3x'></i>
                     </div>
-                    <img
-                      className='img-fluid'
-                      src='/src/assets/img/portfolio/3.jpg'
-                      alt='...'
-                    />
+                  </div>
+                  <img
+                    className='img-fluid'
+                    src='/src/assets/img/portfolio/3.jpg'
+                    alt='...'
+                  />
                   </a>
                   <div className='portfolio-caption'>
-                    <div className='portfolio-caption-heading'>Finish</div>
+                    <div className='portfolio-caption-heading'>Chaqueta Impermeable</div>
                     <div className='portfolio-caption-subheading text-muted'>
-                      Identity
+                      Impermeables
                     </div>
                   </div>
                 </div>
@@ -224,9 +224,9 @@ function Home() {
                     />
                   </a>
                   <div className='portfolio-caption'>
-                    <div className='portfolio-caption-heading'>Lines</div>
+                    <div className='portfolio-caption-heading'>Chaqueta Sintética</div>
                     <div className='portfolio-caption-subheading text-muted'>
-                      Branding
+                      Sintéticos
                     </div>
                   </div>
                 </div>
@@ -254,7 +254,7 @@ function Home() {
                       Traje de dos piezas
                     </div>
                     <div className='portfolio-caption-subheading text-muted'>
-                      Eventos Sociales
+                    Formal - Casual
                     </div>
                   </div>
                 </div>
@@ -282,7 +282,7 @@ function Home() {
                       Traje de tres piezas
                     </div>
                     <div className='portfolio-caption-subheading text-muted'>
-                      Formal - Salida
+                      Formal - Eventos
                     </div>
                   </div>
                 </div>
@@ -465,9 +465,9 @@ function Home() {
                 <div className='row justify-content-center'>
                   <div className='col-lg-8'>
                     <div className='modal-body'>
-                      <h2 className='text-uppercase'>Project Name</h2>
+                      <h2 className='text-uppercase'>Camiseta: Corte Entallado</h2>
                       <p className='item-intro text-muted'>
-                        Lorem ipsum dolor sit amet consectetur.
+                        Premium
                       </p>
                       <img
                         className='img-fluid d-block mx-auto'
@@ -475,21 +475,16 @@ function Home() {
                         alt='...'
                       />
                       <p>
-                        Use this area to describe your project. Lorem ipsum
-                        dolor sit amet, consectetur adipisicing elit. Est
-                        blanditiis dolorem culpa incidunt minus dignissimos
-                        deserunt repellat aperiam quasi sunt officia expedita
-                        beatae cupiditate, maiores repudiandae, nostrum,
-                        reiciendis facere nemo!
+                      Estilo ajustado, manga larga raglán en contraste, tapeta henley de tres botones, tela ligera y suave para un uso cómodo y transpirable.
+                      Y camisas con costuras sólidas con cuello redondo hechas para una mayor durabilidad y un gran ajuste para la moda casual y los fanáticos
+                      del béisbol acérrimos. El escote redondo estilo henley incluye una tapeta de tres botones.
                       </p>
                       <ul className='list-inline'>
                         <li>
-                          <strong>Client:</strong>
-                          Threads
+                          <strong>Caballeros</strong>
                         </li>
                         <li>
-                          <strong>Category:</strong>
-                          Illustration
+                          <strong>Casual</strong>
                         </li>
                       </ul>
                       <button
@@ -523,9 +518,9 @@ function Home() {
                 <div className='row justify-content-center'>
                   <div className='col-lg-8'>
                     <div className='modal-body'>
-                      <h2 className='text-uppercase'>Project Name</h2>
+                      <h2 className='text-uppercase'>Chaqueta de algodón</h2>
                       <p className='item-intro text-muted'>
-                        Lorem ipsum dolor sit amet consectetur.
+                        Ropa para caballero.
                       </p>
                       <img
                         className='img-fluid d-block mx-auto'
@@ -533,21 +528,17 @@ function Home() {
                         alt='...'
                       />
                       <p>
-                        Use this area to describe your project. Lorem ipsum
-                        dolor sit amet, consectetur adipisicing elit. Est
-                        blanditiis dolorem culpa incidunt minus dignissimos
-                        deserunt repellat aperiam quasi sunt officia expedita
-                        beatae cupiditate, maiores repudiandae, nostrum,
-                        reiciendis facere nemo!
+                      Excelentes chaquetas de abrigo para primavera / otoño / invierno, adecuadas para muchas ocasiones,
+                      como trabajar, ir de excursión, acampar, escalar montañas / rocas, andar en bicicleta, viajar u otras 
+                      actividades al aire libre. Buena opción de regalo para usted o un miembro de su familia. Un afectuoso amor al padre, 
+                      esposo o hijo en este día de acción de gracias o Navidad.
                       </p>
                       <ul className='list-inline'>
                         <li>
-                          <strong>Client:</strong>
-                          Explore
+                          <strong>Caballero</strong>
                         </li>
                         <li>
-                          <strong>Category:</strong>
-                          Graphic Design
+                          <strong>Casual</strong>
                         </li>
                       </ul>
                       <button
@@ -581,9 +572,9 @@ function Home() {
                 <div className='row justify-content-center'>
                   <div className='col-lg-8'>
                     <div className='modal-body'>
-                      <h2 className='text-uppercase'>Project Name</h2>
+                      <h2 className='text-uppercase'>Chaqueta de Lluvia</h2>
                       <p className='item-intro text-muted'>
-                        Lorem ipsum dolor sit amet consectetur.
+                        Ropa para Dama: Impermeables.
                       </p>
                       <img
                         className='img-fluid d-block mx-auto'
@@ -591,21 +582,17 @@ function Home() {
                         alt='...'
                       />
                       <p>
-                        Use this area to describe your project. Lorem ipsum
-                        dolor sit amet, consectetur adipisicing elit. Est
-                        blanditiis dolorem culpa incidunt minus dignissimos
-                        deserunt repellat aperiam quasi sunt officia expedita
-                        beatae cupiditate, maiores repudiandae, nostrum,
-                        reiciendis facere nemo!
+                      Perfeto, ligero para viajes o ropa casual. Manga larga con capucha, diseño de cintura con cordón ajustable. 
+                      Chubasquero con cierre frontal con botones y cremallera, totalmente forrado a rayas y el chubasquero tiene 2 bolsillos 
+                      laterales son de buen tamaño para guardar todo tipo de cosas, cubre las caderas y la capucha es generosa pero no exagera. 
+                      Los cordones ajustables le dan un aspecto de estilo real.
                       </p>
                       <ul className='list-inline'>
                         <li>
-                          <strong>Client:</strong>
-                          Finish
+                          <strong>Damas</strong>
                         </li>
                         <li>
-                          <strong>Category:</strong>
-                          Identity
+                          <strong>Impermeables</strong>
                         </li>
                       </ul>
                       <button
@@ -639,9 +626,9 @@ function Home() {
                 <div className='row justify-content-center'>
                   <div className='col-lg-8'>
                     <div className='modal-body'>
-                      <h2 className='text-uppercase'>Project Name</h2>
+                      <h2 className='text-uppercase'>Lock and Love Chaqueta</h2>
                       <p className='item-intro text-muted'>
-                        Lorem ipsum dolor sit amet consectetur.
+                        Chaqueta motociclista de piel sintética con capucha y desmontable para mujer.
                       </p>
                       <img
                         className='img-fluid d-block mx-auto'
@@ -649,21 +636,17 @@ function Home() {
                         alt='...'
                       />
                       <p>
-                        Use this area to describe your project. Lorem ipsum
-                        dolor sit amet, consectetur adipisicing elit. Est
-                        blanditiis dolorem culpa incidunt minus dignissimos
-                        deserunt repellat aperiam quasi sunt officia expedita
-                        beatae cupiditate, maiores repudiandae, nostrum,
-                        reiciendis facere nemo!
+                      100% POLIURETANO (exterior) 100% POLIÉSTER (forro) 75% POLIÉSTER 25% ALGODÓN (SUÉTER), 
+                      Material de piel sintética para mayor estilo y comodidad / 2 bolsillos en la parte delantera, 
+                      Chaqueta de piel sintética estilo denim con capucha 2-For-One, Detalle de botón en cintura / 
+                      Detalle de costuras a los lados, LAVAR A MANO SOLAMENTE / NO USAR LEJÍA / SECAR LINEAS / NO PLANCHAR
                       </p>
                       <ul className='list-inline'>
                         <li>
-                          <strong>Client:</strong>
-                          Lines
+                          <strong>Dama</strong>
                         </li>
                         <li>
-                          <strong>Category:</strong>
-                          Branding
+                          <strong>Sintético</strong>
                         </li>
                       </ul>
                       <button
@@ -697,9 +680,9 @@ function Home() {
                 <div className='row justify-content-center'>
                   <div className='col-lg-8'>
                     <div className='modal-body'>
-                      <h2 className='text-uppercase'>Project Name</h2>
+                      <h2 className='text-uppercase'>Traje de Dos Piezas</h2>
                       <p className='item-intro text-muted'>
-                        Lorem ipsum dolor sit amet consectetur.
+                      Traje Formal de Dos Piezas Corte Clásico.
                       </p>
                       <img
                         className='img-fluid d-block mx-auto'
@@ -707,21 +690,18 @@ function Home() {
                         alt='...'
                       />
                       <p>
-                        Use this area to describe your project. Lorem ipsum
-                        dolor sit amet, consectetur adipisicing elit. Est
-                        blanditiis dolorem culpa incidunt minus dignissimos
-                        deserunt repellat aperiam quasi sunt officia expedita
-                        beatae cupiditate, maiores repudiandae, nostrum,
-                        reiciendis facere nemo!
+                      El traje formal de dos piezas es uno de los conjuntos más versátiles que puedes usar. 
+                      Este traje es perfecto para uso cotidiano, bodas, eventos formales o reuniones de negocios. 
+                      Estos trajes formales de negocios son tan versátiles porque puedes usarlos con camisa de manga larga 
+                      para o con un cuello en V para un atuendo formal, pero tambien con una camisa e incluso un sueter 
+                      para un atuendo mas casual pero elegante.
                       </p>
                       <ul className='list-inline'>
                         <li>
-                          <strong>Client:</strong>
-                          Southwest
+                          <strong>Caballero</strong>
                         </li>
                         <li>
-                          <strong>Category:</strong>
-                          Website Design
+                          <strong>Formal - Casual</strong>
                         </li>
                       </ul>
                       <button
@@ -756,10 +736,10 @@ function Home() {
                   <div className='col-lg-8'>
                     <div className='modal-body'>
                       <h2 className='text-uppercase'>
-                        Traje completo para hombre
+                      Traje de Tres Piezas
                       </h2>
                       <p className='item-intro text-muted'>
-                        Traje de tres piezas formal.
+                      Traje Formal de Tres Piezas Corte Clásico.
                       </p>
                       <img
                         className='img-fluid d-block mx-auto'
@@ -772,12 +752,10 @@ function Home() {
                       </p>
                       <ul className='list-inline'>
                         <li>
-                          <strong>Client:</strong>
-                          Window
+                          <strong>Cabllero</strong>
                         </li>
                         <li>
-                          <strong>Category:</strong>
-                          Photography
+                          <strong>Formal</strong>
                         </li>
                       </ul>
                       <button
@@ -835,9 +813,6 @@ function Home() {
             </div>
           </div>
         </footer>
-        <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js'></script>
-        <script src='/src/js/scripts.js'></script>
-        <script src='https://cdn.startbootstrap.com/sb-forms-latest.js'></script>
       </body>
     </React.Fragment>
   );
