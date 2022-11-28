@@ -1,7 +1,22 @@
-import React from 'react';
+import { useEffect } from 'react';
+import ResponsiveAppBar from '../../components/Navbar';
+import { Button, Container, Typography } from '@mui/material';
 
+const datosUser = () => {
+  console.log(localStorage.getItem('user'));
+};
 function Dashboard() {
-  return <h1>Dashboard Administrador</h1>;
+  return (
+    <>
+      <ResponsiveAppBar />
+      <Container sx={{ mt: 2 }}>
+        <Typography variant='h4' color='initial'>
+          Información
+        </Typography>
+        <Button onClick={datosUser}>Datos user</Button>
+      </Container>
+    </>
+  );
 }
 
 export default Dashboard;

@@ -1,12 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import { Button } from '@mui/material';
 import logo from '/src/assets/img/logo.svg';
 import loading from '/src/assets/img/loading.gif';
+import AlertError from '../../components/AlertError';
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: '',
       password: '',
+      error: false,
     };
 
     this.iniciarSesion = this.iniciarSesion.bind(this);
@@ -36,6 +40,7 @@ class Login extends Component {
   }
 
   esAutenticado(event) {
+    this.error = false;
     const clickInicioSesion = !this.state.seAutentico;
 
     this.actualizarEstadoCompletamente(clickInicioSesion);
@@ -53,18 +58,18 @@ class Login extends Component {
 
     this.autenticarUsuario(url, body)
       .then((value) => {
-        localStorage.setItem('userID', value.user.id.toString());
+        localStorage.setItem('user', JSON.stringify(value.user));
         localStorage.setItem('token', value.token.toString());
-        alert(JSON.stringify(this.state));
-        alert(JSON.stringify(value));
+        localStorage.setItem('isLogged', true);
         //reemplazar por el dashboard ---------------------------------------------------------------
-        window.location.href = window.location.href.replace('login', '');
+        window.location.href = window.location.href.replace(
+          'login',
+          'dashboard-admin'
+        );
       })
       .catch((error) => {
         this.actualizarEstadoCompletamente(false);
-        alert(
-          'Datos de inicio de sesión incorrectos.\nVerifique que los datos ingresados sean correctos.'
-        );
+        this.error = true;
       });
   }
 
@@ -85,6 +90,15 @@ class Login extends Component {
     return (
       <>
         <div className='container py-5 h-100'>
+          <Button
+            startIcon={<ArrowBackIosIcon />}
+            onClick={() =>
+              (window.location.href = window.location.href.replace('login', ''))
+            }
+            sx={{ ml: 15 }}
+          >
+            Dashboard
+          </Button>
           <div className='row d-flex justify-content-center align-items-center h-100'>
             <div className='col col-xl-10'>
               <div className='card' style={{ borderRadius: '1rem' }}>
@@ -155,8 +169,15 @@ class Login extends Component {
                         </div>
 
                         <a href='#!' className='small text-muted'>
-                          Privacy policy
+                          ¿Olvidaste tu contraseña?
                         </a>
+                        {this.error && (
+                          <AlertError
+                            message={
+                              'Datos de inicio de sesión incorrectos.\nVerifique que los datos ingresados sean correctos.'
+                            }
+                          />
+                        )}
                       </form>
                     </div>
                   </div>
