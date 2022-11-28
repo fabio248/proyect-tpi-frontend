@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import logo from "/src/assets/img/logo.svg"
-import loading from "/src/assets/img/loading.gif"
+import React, { Component } from 'react';
+import logo from '/src/assets/img/logo.svg';
+import loading from '/src/assets/img/loading.gif';
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -9,21 +9,13 @@ class Login extends Component {
       password: '',
     };
 
-constructor(props) {
-  super(props);
-  this.state = {
-    email:'',
-    password:'',
-    seAutentico:false
+    this.iniciarSesion = this.iniciarSesion.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.esAutenticado = this.esAutenticado.bind(this);
   }
 
-  this.iniciarSesion = this.iniciarSesion.bind(this)
-  this.handleInputChange = this.handleInputChange.bind(this)
-  this.esAutenticado = this.esAutenticado.bind(this)
-}
-
-  handleInputChange(event){
-    event.preventDefault()
+  handleInputChange(event) {
+    event.preventDefault();
     const target = event.target;
 
     this.setState({
@@ -31,52 +23,49 @@ constructor(props) {
     });
   }
 
-  actualizarEstadoCompletamente(valor){
-
+  actualizarEstadoCompletamente(valor) {
     const estado = {
-      email:this.state.email,
-      password:this.state.password,
-      seAutentico:valor
-    }
+      email: this.state.email,
+      password: this.state.password,
+      seAutentico: valor,
+    };
 
-    console.log(estado)
+    console.log(estado);
 
-    this.setState(estado)
+    this.setState(estado);
   }
 
-  esAutenticado( event){
+  esAutenticado(event) {
+    const clickInicioSesion = !this.state.seAutentico;
 
-
-    const clickInicioSesion = !this.state.seAutentico
-
-    this.actualizarEstadoCompletamente(clickInicioSesion)
-
+    this.actualizarEstadoCompletamente(clickInicioSesion);
   }
 
   iniciarSesion(event) {
     const cuerpo = {
-      email:this.state.email,
-      password: this.state.password
-    }
+      email: this.state.email,
+      password: this.state.password,
+    };
 
-    const body = JSON.stringify(cuerpo)
-    const url = `https://proyecto-tpi.onrender.com/api/v1/auth/login`
-    event.preventDefault()
+    const body = JSON.stringify(cuerpo);
+    const url = `https://proyecto-tpi.onrender.com/api/v1/auth/login`;
+    event.preventDefault();
 
-    this.autenticarUsuario(url, body).then((value) => {
-
-
-      localStorage.setItem("userID", value.user.id.toString())
-      localStorage.setItem("token", value.token.toString())
-      alert(JSON.stringify(this.state))
-      alert(JSON.stringify(value))
-      //reemplazar por el dashboard ---------------------------------------------------------------
-      window.location.href = window.location.href.replace("login", "")
-    }).catch(error => {
-      this.actualizarEstadoCompletamente(false)
-      alert("Datos de inicio de sesión incorrectos.\nVerifique que los datos ingresados sean correctos.")})
-
-
+    this.autenticarUsuario(url, body)
+      .then((value) => {
+        localStorage.setItem('userID', value.user.id.toString());
+        localStorage.setItem('token', value.token.toString());
+        alert(JSON.stringify(this.state));
+        alert(JSON.stringify(value));
+        //reemplazar por el dashboard ---------------------------------------------------------------
+        window.location.href = window.location.href.replace('login', '');
+      })
+      .catch((error) => {
+        this.actualizarEstadoCompletamente(false);
+        alert(
+          'Datos de inicio de sesión incorrectos.\nVerifique que los datos ingresados sean correctos.'
+        );
+      });
   }
 
   async autenticarUsuario(url, body) {
@@ -91,9 +80,6 @@ constructor(props) {
 
     return respuesta.json();
   }
-
-
-
 
   render() {
     return (
@@ -155,52 +141,32 @@ constructor(props) {
                         </div>
 
                         <div className='pt-1 mb-4'>
-                          <input
-                            className='btn btn-primary btn-lg btn-block'
+                          <button
+                            className='btn btn-primary  btn-lg btn-block'
                             type='submit'
-                            value={'Iniciar sesión.'}
-                          />
+                            onClick={this.esAutenticado}
+                          >
+                            {this.state.seAutentico ? (
+                              <img src={loading} width={25} height={25} />
+                            ) : (
+                              'Iniciar Sesión.'
+                            )}
+                          </button>
                         </div>
 
-                        <a className='small text-muted' href='#!'>
-                          Forgot password?
+                        <a href='#!' className='small text-muted'>
+                          Privacy policy
                         </a>
-
-                          </div>
-
-                          <div className="form-outline mb-4">
-                            <label htmlFor={"password"}></label>
-                            <input required={true} type="password" id="password" className="form-control form-control-lg"
-                                   placeholder={"Contraseña"} onChange={this.handleInputChange} name={"password"} />
-
-                          </div>
-
-                          <div className="pt-1 mb-4">
-                            <button className="btn btn-primary  btn-lg btn-block" type="submit" onClick={this.esAutenticado}  >
-                              { (this.state.seAutentico ? <img src={loading} width={25} height={25}/> : "Iniciar Sesión.")}
-                            </button>
-                          </div>
-
-
-
-
-
-
-                          <a href="#!" className="small text-muted">Privacy policy</a>
-                        </form>
-
-                      </div>
+                      </form>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
-
-
-        </>
-    )
+        </div>
+      </>
+    );
   }
 }
 
