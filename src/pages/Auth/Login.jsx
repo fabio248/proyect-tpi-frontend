@@ -4,6 +4,7 @@ import { Button } from '@mui/material';
 import logo from '/src/assets/img/logo.svg';
 import loading from '/src/assets/img/loading.gif';
 import AlertError from '../../components/AlertError';
+import CircularProgress from '@mui/material/CircularProgress';
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -34,7 +35,7 @@ class Login extends Component {
       seAutentico: valor,
     };
 
-    console.log(estado);
+
 
     this.setState(estado);
   }
@@ -161,7 +162,7 @@ class Login extends Component {
                             onClick={this.esAutenticado}
                           >
                             {this.state.seAutentico ? (
-                              <img src={loading} width={25} height={25} />
+                              <CircularProgress color={"inherit"} size={"1rem"}/>
                             ) : (
                               'Iniciar Sesión.'
                             )}
