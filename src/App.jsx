@@ -5,7 +5,7 @@ import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
 import RequireAuth from './pages/Auth/RequireAuth';
 import Logout from './pages/Auth/Logout';
-import Pedido from './pages/Auth/Pedido';
+import Pedido from './pages/Dashboard/Pedido';
 import Profile from './pages/Profile';
 
 function App() {
