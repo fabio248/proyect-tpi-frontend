@@ -6,6 +6,16 @@ import Register from './pages/Auth/Register';
 import RequireAuth from './pages/Auth/RequireAuth';
 import Logout from './pages/Auth/Logout';
 import Profile from './pages/Profile';
+import Clientes from './pages/Dashboard/Clientes';
+import Pedidos from './pages/Dashboard/Pedidos';
+import Usuarios from './pages/Dashboard/Users';
+
+const validateRole = () => {
+  const user = JSON.parse(localStorage.getItem('user'));
+  if (localStorage.getItem('isLogged') !== 'true' || user.role !== 'ADMIN')
+    return false;
+  return true;
+};
 
 function App() {
   return (
@@ -24,7 +34,36 @@ function App() {
         >
           <Route path='/profile' element={<Profile />}></Route>
           <Route path='/dashboard-admin' element={<Dashboard />}></Route>
+          <Route
+            path='/dashboard-admin/clientes'
+            element={
+              <Dashboard>
+                <Clientes />
+              </Dashboard>
+            }
+          ></Route>
+          <Route
+            path='/dashboard-admin/pedidos'
+            element={
+              <Dashboard>
+                <Pedidos />
+              </Dashboard>
+            }
+          ></Route>
         </Route>
+        <Route
+          path='/dashboard-admin/usuarios'
+          element={
+            <RequireAuth
+              isLogged={validateRole()}
+              redirectTo='/dashboard-admin/clientes'
+            >
+              <Dashboard>
+                <Usuarios />
+              </Dashboard>
+            </RequireAuth>
+          }
+        ></Route>
       </Routes>
     </BrowserRouter>
   );

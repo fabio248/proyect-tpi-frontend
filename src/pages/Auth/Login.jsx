@@ -34,8 +34,6 @@ class Login extends Component {
       seAutentico: valor,
     };
 
-    console.log(estado);
-
     this.setState(estado);
   }
 
@@ -64,7 +62,7 @@ class Login extends Component {
         //reemplazar por el dashboard ---------------------------------------------------------------
         window.location.href = window.location.href.replace(
           'login',
-          'dashboard-admin'
+          'dashboard-admin/clientes'
         );
       })
       .catch((error) => {
@@ -97,7 +95,7 @@ class Login extends Component {
             }
             sx={{ ml: 15 }}
           >
-            Dashboard
+            Página de inicio
           </Button>
           <div className='row d-flex justify-content-center align-items-center h-100'>
             <div className='col col-xl-10'>

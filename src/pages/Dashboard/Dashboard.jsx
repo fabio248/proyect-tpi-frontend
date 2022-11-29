@@ -5,16 +5,11 @@ import { Button, Container, Typography } from '@mui/material';
 const datosUser = () => {
   console.log(localStorage.getItem('user'));
 };
-function Dashboard() {
+function Dashboard({ children }) {
   return (
     <>
       <ResponsiveAppBar />
-      <Container sx={{ mt: 2 }}>
-        <Typography variant='h4' color='initial'>
-          Información
-        </Typography>
-        <Button onClick={datosUser}>Datos user</Button>
-      </Container>
+      <Container sx={{ mt: 2 }}>{children}</Container>
     </>
   );
 }

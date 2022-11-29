@@ -16,17 +16,34 @@ import { useNavigate } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
 
-const pages = ['Clientes', 'Usuarios', 'Pedidos'];
 const settings = [
   { name: 'Profile', url: '/profile' },
   { name: 'Logout', url: '/logout' },
 ];
 
 function ResponsiveAppBar() {
+  const [pages, setPages] = React.useState([]);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [user, setUser] = React.useState('');
   const navigate = useNavigate();
-
+  React.useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem('user')));
+  }, []);
+  React.useEffect(() => {
+    if (user.role !== 'ADMIN') {
+      setPages([
+        { name: 'Clientes', url: '/dashboard-admin/clientes' },
+        { name: 'Pedidos', url: '/dashboard-admin/pedidos' },
+      ]);
+    } else {
+      setPages([
+        { name: 'Clientes', url: '/dashboard-admin/clientes' },
+        { name: 'Usuarios', url: '/dashboard-admin/usuarios' },
+        { name: 'Pedidos', url: '/dashboard-admin/pedidos' },
+      ]);
+    }
+  }, [user]);
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -95,8 +112,10 @@ function ResponsiveAppBar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign='center'>{page}</Typography>
+                <MenuItem key={page.name} onClick={handleCloseNavMenu}>
+                  <Button onClick={() => navigate(page.url)}>
+                    {page.name}
+                  </Button>
                 </MenuItem>
               ))}
             </Menu>
@@ -118,16 +137,16 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            DASHBOARD
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
-                key={page}
-                onClick={handleCloseNavMenu}
+                key={page.name}
+                onClick={() => navigate(page.url)}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page}
+                {page.name}
               </Button>
             ))}
           </Box>
@@ -135,10 +154,7 @@ function ResponsiveAppBar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title='Abrir configuraciones'>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar
-                  alt='Remy Sharp'
-                  src='../assets/img/avatar/avatar.png'
-                />
+                <Avatar alt={user.name} src='img' />
               </IconButton>
             </Tooltip>
             <Menu
