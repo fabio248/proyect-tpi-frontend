@@ -61,31 +61,34 @@ class Pedido extends Component {
                                     <h3 className='section-subheading text-muted'>Pedidos</h3>
                                 </div>
                             </div>
-                            <div class='container'>
+                            <div id='view-pedidos'>
                                 <form action="return false;" method="get">
-                                    <div className='container bg-secondary w-80 p-2' id='opciones'>
+                                    <div className='container bg-secondary w-80 p-2 mb-2' id='opciones'>
+                                        <h4 class='text-white text-uppercase'>Opciones</h4>
                                         <input type="button" value='Agregar' class='btn btn-primary m-1' />
                                         <input type="button" value='Editar' class='btn btn-info m-1' />
                                         <input type="button" value="Eliminar" class='btn btn-danger' />
                                     </div>
-                                    <table class='table table-dark table-striped table-hover' id='tabla-pedidos'>
-                                        <thead>
-                                            <tr>
-                                                <th>► Select</th>
-                                                <th>Tipo</th>
-                                                <th>Fecha de Recepción</th>
-                                                <th>Fecha de Entrega</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td><input type="radio" name="select" id="" /></td>
-                                                <td>2</td>
-                                                <td>3</td>
-                                                <td>4</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <div class='container'>
+                                        <table class='table table-dark table-striped table-hover' id='tabla-pedidos'>
+                                            <thead>
+                                                <tr>
+                                                    <th class='w-auto p-3'>► Select</th>
+                                                    <th>Tipo</th>
+                                                    <th>Fecha de Recepción</th>
+                                                    <th>Fecha de Entrega</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class='overflow-scroll mh-50'>
+                                                <tr>
+                                                    <td><input class='center p-3' type="radio" name="id" /></td>
+                                                    <td>2</td>
+                                                    <td>3</td>
+                                                    <td>4</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </form>
                             </div>
                         </div>
