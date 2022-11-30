@@ -16,7 +16,7 @@ function App() {
         <Route path='/login' element={<Login />}></Route>
         <Route path='/register' element={<Register />}></Route>
         <Route path='/logout' element={<Logout />}></Route>
-        <Route path='/pedido' element={<Pedido />}></Route>
+        <Route path='/pedidos' element={<Pedido />}></Route>
         <Route
           element={
             <RequireAuth
