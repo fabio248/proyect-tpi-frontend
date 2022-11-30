@@ -5,7 +5,6 @@ import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
 import RequireAuth from './pages/Auth/RequireAuth';
 import Logout from './pages/Auth/Logout';
-import Pedido from './pages/Dashboard/Pedido';
 import Profile from './pages/Profile';
 import Clientes from './pages/Dashboard/Clientes';
 import Pedidos from './pages/Dashboard/Pedidos';
@@ -30,7 +29,7 @@ function App() {
         <Route path='/logout' element={<Logout />}></Route>
         <Route path='/cambiar-contraseña' element={<ChangePassword />}></Route>
         <Route path='/olvidar-contraseña' element={<ForgotPassword />}></Route>
-        <Route path='/pedidos' element={<Pedido />}></Route>
+        <Route path='/pedidos' element={<Pedidos />}></Route>
         <Route
           element={
             <RequireAuth
@@ -52,7 +51,7 @@ function App() {
             path='/dashboard-admin/pedidos'
             element={
               <Dashboard>
-                <Pedidos />
+                <Pedidos/>
               </Dashboard>
             }
           ></Route>
