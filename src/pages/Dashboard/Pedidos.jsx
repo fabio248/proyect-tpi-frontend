@@ -12,7 +12,6 @@ class Pedidos extends Component{
         this.state = {
             pedidos: {},
             hayDatos:false,
-            consultaEjecutada:false
         }
     }
 
