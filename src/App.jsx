@@ -10,6 +10,8 @@ import Profile from './pages/Profile';
 import Clientes from './pages/Dashboard/Clientes';
 import Pedidos from './pages/Dashboard/Pedidos';
 import Usuarios from './pages/Dashboard/Users';
+import ChangePassword from './pages/Auth/ChangePassword';
+import ForgotPassword from './pages/Auth/ForgotPassword';
 
 const validateRole = () => {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -26,6 +28,8 @@ function App() {
         <Route path='/login' element={<Login />}></Route>
         <Route path='/register' element={<Register />}></Route>
         <Route path='/logout' element={<Logout />}></Route>
+        <Route path='/cambiar-contraseña' element={<ChangePassword />}></Route>
+        <Route path='/olvidar-contraseña' element={<ForgotPassword />}></Route>
         <Route path='/pedidos' element={<Pedido />}></Route>
         <Route
           element={

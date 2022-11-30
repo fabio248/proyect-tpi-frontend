@@ -167,7 +167,10 @@ class Login extends Component {
                           </button>
                         </div>
 
-                        <a href='#!' className='small text-muted'>
+                        <a
+                          href='/olvidar-contraseña'
+                          className='small text-muted'
+                        >
                           ¿Olvidaste tu contraseña?
                         </a>
                         {this.error && (
