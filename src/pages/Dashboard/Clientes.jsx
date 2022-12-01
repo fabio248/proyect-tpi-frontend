@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { CircularProgress, Box, IconButton, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
-import UpgradeIcon from "@mui/icons-material/Upgrade";
+import { CircularProgress, Box, IconButton, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip } from "@mui/material";
+import UpdateIcon from "@mui/icons-material/Update";
 import DeleteIcon from "@mui/icons-material/Delete";
-import AddIcon from "@mui/icons-material/Add";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
 class Clientes extends Component {
 
@@ -65,9 +65,8 @@ class Clientes extends Component {
         else {
             return(
                 <React.Fragment>
-                    <div className="container">
+                    <div className="container m-2 p-3">
                         <div className='text-center'>
-                            <h2 className='section-heading text-uppercase'>Clientes</h2>
                             <h3 className='section-subheading text-muted'>
                                 Tabla de Clientes Registrados
                             </h3>
@@ -119,24 +118,30 @@ class Clientes extends Component {
                                                 </TableCell>
                                                 <TableCell>
                                                     <Box sx={{ flexShrink: 0, ml: 2.5 }}>
-                                                        <IconButton
-                                                            aria-label="Añadir"
-                                                            color={"success"}
-                                                        >
-                                                            <AddIcon />
-                                                        </IconButton>
-                                                        <IconButton
-                                                            aria-label="Actualizar"
-                                                            color={"warning"}
-                                                        >
-                                                            <UpgradeIcon />
-                                                        </IconButton>
-                                                        <IconButton
-                                                            aria-label="Borrar"
-                                                            color={"error"}
-                                                        >
-                                                            <DeleteIcon />
-                                                        </IconButton>
+                                                        <Tooltip title={"Visualizar"}>
+                                                            <IconButton
+                                                                aria-label="Visualizar"
+                                                                color={"primary"}
+                                                            >
+                                                                <VisibilityIcon/>
+                                                            </IconButton>
+                                                        </Tooltip>
+                                                        <Tooltip title={"Actualizar"}>
+                                                            <IconButton
+                                                                aria-label="Actualizar"
+                                                                color={"warning"}
+                                                            >
+                                                                <UpdateIcon />
+                                                            </IconButton>
+                                                        </Tooltip>
+                                                        <Tooltip title="Borrar">
+                                                            <IconButton
+                                                                aria-label="Borrar"
+                                                                color={"error"}
+                                                            >
+                                                                <DeleteIcon />
+                                                            </IconButton>
+                                                        </Tooltip>
                                                     </Box>
                                                 </TableCell>
                                             </TableRow>
