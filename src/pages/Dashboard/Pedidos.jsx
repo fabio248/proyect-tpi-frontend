@@ -1,4 +1,4 @@
-import {Component, useState} from "react";
+import React, {Component, useState} from "react";
 import {
     TableContainer,
     Table,
@@ -31,11 +31,14 @@ class Pedidos extends Component{
             pedidos: {},
             hayDatos:false,
             modalBorrarAbierto:false,
-            idPedido:undefined
+            modalActualizarAbierto:false,
+            pedidoSeleccionado:undefined
         }
 
         this.abrirModalBorrarPedido = this.abrirModalBorrarPedido.bind(this)
         this.cerrarModalBorrarPedido = this.cerrarModalBorrarPedido.bind(this)
+        this.abrirModalActualizarPedido = this.abrirModalActualizarPedido.bind(this)
+        this.cerrarModalActualizarPedido = this.cerrarModalActualizarPedido.bind(this)
         this.borrarPedido = this.borrarPedido.bind(this)
         this.actualizarEstado = this.actualizarEstado.bind(this)
     }
@@ -48,7 +51,7 @@ class Pedidos extends Component{
 
     async borrarPedido(){
 
-        const respuesta = await fetch("https://proyecto-tpi.onrender.com/api/v1/tasks/"+this.state.idPedido,
+        const respuesta = await fetch("https://proyecto-tpi.onrender.com/api/v1/tasks/"+this.state.pedidoSeleccionado.id,
             {
             method:"delete",
             headers:{
@@ -73,36 +76,44 @@ class Pedidos extends Component{
 
         respuesta.json()
             .then(
-                value => {this.actualizarEstado(value,true,false,undefined)}
+                value => {this.actualizarEstado(value,true,false,false,undefined)}
             )
     }
 
 
-    actualizarEstado(pedidos,existenDatos,modalBorrarPedidoEstaAbierto,idPedido){
+    actualizarEstado(pedidos,existenDatos,modalBorrarPedidoEstaAbierto,modalActualizarPedidoEstaAbierto,pedidoSeleccionado){
 
         this.setState( {
             pedidos:pedidos,
             hayDatos: existenDatos,
             modalBorrarAbierto: modalBorrarPedidoEstaAbierto,
-            idPedido:idPedido
+            modalActualizarAbierto:modalActualizarPedidoEstaAbierto,
+            pedidoSeleccionado:pedidoSeleccionado
         })
     }
 
-    abrirModalBorrarPedido(idPedido){
-        this.actualizarEstado(this.state.pedidos,this.state.hayDatos,true,idPedido)
+    abrirModalBorrarPedido(pedidoSeleccionado){
+        this.actualizarEstado(this.state.pedidos,this.state.hayDatos,true,pedidoSeleccionado)
     }
 
     cerrarModalBorrarPedido(){
         this.actualizarEstado(this.state.pedidos,this.state.hayDatos,false,undefined)
     }
 
+    abrirModalActualizarPedido(pedidoSeleccionado){
+        this.actualizarEstado(this.state.pedidos,this.state.hayDatos,false,true,pedidoSeleccionado)
+    }
+
+    cerrarModalActualizarPedido(){
+        this.actualizarEstado(this.state.pedidos,this.state.hayDatos,false,false,undefined)
+    }
 
     render() {
 
         if(!this.state.hayDatos){
             this.getPedidos()
 
-            return (<>
+            return (<React.Fragment>
                   <Grid
                       container
                       spacing={0}
@@ -118,12 +129,21 @@ class Pedidos extends Component{
                           <h6 color="primary">Obtenido Datos</h6>
                       </Box>
                   </Grid>
-                </>
+            </React.Fragment>
             )
         }
         else {
         return (
-            <>
+            <React.Fragment>
+
+                <div className="container m-2 p-3">
+                    <div className='text-center'>
+                        <h3 className='section-subheading text-muted'>
+                            Tabla de Pedidos
+                        </h3>
+                    </div>
+                </div>
+
                 <TableContainer >
                     <Table>
                         <TableHead>
@@ -163,15 +183,17 @@ class Pedidos extends Component{
                                                         <IconButton
                                                             size={"small"}
                                                             color={"error"}
-                                                            onClick={() => {this.abrirModalBorrarPedido(fila.id)}}
-
+                                                            onClick={() => {this.abrirModalBorrarPedido(fila)}}
                                                             >
                                                             <Delete/>
                                                         </IconButton>
                                                     </Tooltip>
 
                                                     <Tooltip title={"Actualizar pedido"}>
-                                                        <IconButton size={"small"}>
+                                                        <IconButton
+                                                            size={"small"}
+                                                            onClick={()=>{this.abrirModalActualizarPedido(fila)}}
+                                                            >
                                                             <Update/>
                                                         </IconButton>
                                                     </Tooltip>
@@ -189,15 +211,8 @@ class Pedidos extends Component{
                                 )
                             }
                         </TableBody>
-                        <TableFooter>
-                            <TableRow>
-                                <TablePagination count={100}
-                                                 page={0}
-                                                 rowsPerPage={2}
-                                                 labelRowsPerPage={"Filas por pagina"}
-                                                 onPageChange={this.actualizarTablaDePedidos}/>
-                            </TableRow>
-                        </TableFooter>
+
+
                     </Table>
                 </TableContainer>
 
@@ -220,7 +235,15 @@ class Pedidos extends Component{
 
                 </Dialog>
 
-            </>
+                <Dialog
+                    open={this.state.modalActualizarAbierto}
+                    onClose={this.cerrarModalActualizarPedido}>
+                    <DialogContent>
+                        <DialogContentText>A ver</DialogContentText>
+                    </DialogContent>
+                </Dialog>
+
+            </React.Fragment>
         )
         }
     }
