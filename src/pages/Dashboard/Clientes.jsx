@@ -1,26 +1,28 @@
-import { CircularProgress, Box, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import React, { Component } from "react";
-
+import { CircularProgress, Box, IconButton, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import UpgradeIcon from "@mui/icons-material/Upgrade";
+import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from "@mui/icons-material/Add";
 
 class Clientes extends Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
             clientes: {},
             nulo:true,
-            prueba:false,
         };
     }
 
     // Obtiene los clientes
     async getClientes() {
         
-        const peticion = await fetch('https://proyecto-tpi.onrender.com/api/v1/clients', {
-            method:'GET',
+        const peticion = await fetch("https://proyecto-tpi.onrender.com/api/v1/clients", {
+            method:"GET",
             headers: {
-                'API':'78b96cea5c47cf11ae257dd16dd09e809f5bb205c29db1fdde1a33bede7e873b',
-                'Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMmJlN2MwZS01Mjc1LTQyNjEtYmZiMC1jMDcxYWE4NGI1NTIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2NjkzNDAzNDd9.yh76A2ekWXODxuAIdsRmdtB9KOr4kdFGtULH9QWlQR8',
+                "API":"78b96cea5c47cf11ae257dd16dd09e809f5bb205c29db1fdde1a33bede7e873b",
+                "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMmJlN2MwZS01Mjc1LTQyNjEtYmZiMC1jMDcxYWE4NGI1NTIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2NjkzNDAzNDd9.yh76A2ekWXODxuAIdsRmdtB9KOr4kdFGtULH9QWlQR8",
             }
         });
         
@@ -29,7 +31,6 @@ class Clientes extends Component {
                 clientes:data,
                 nulo:false,
             })
-            console.log(data)
         }).catch(exp => {
             console.log(exp)
         });
@@ -37,11 +38,41 @@ class Clientes extends Component {
 
     render() {
 
-        this.getClientes();
+        if(this.state.nulo) {
 
-        if(this.state.nulo == false) {
+            this.getClientes();
+
             return(
                 <React.Fragment>
+                    <Grid
+                        container
+                        spacing={0}
+                        direction="column"
+                        alignItems="center"
+                        justifyContent="center"
+                        style={{ minHeight: '100vh' }}
+                    >
+                        <Box>
+                            <CircularProgress color={"primary"} />
+                        </Box>
+                        <Box>
+                            <h6 color="primary">Obtenido Datos</h6>
+                        </Box>
+                    </Grid>
+                </React.Fragment>
+            );    
+        }
+        else {
+            return(
+                <React.Fragment>
+                    <div className="container">
+                        <div className='text-center'>
+                            <h2 className='section-heading text-uppercase'>Clientes</h2>
+                            <h3 className='section-subheading text-muted'>
+                                Tabla de Clientes Registrados
+                            </h3>
+                        </div>
+                    </div>
                     <TableContainer>
                         <Table>
                             <TableHead>
@@ -60,6 +91,9 @@ class Clientes extends Component {
                                     </TableCell>
                                     <TableCell>
                                         Correo Elétronico
+                                    </TableCell>
+                                    <TableCell>
+                                        Acciones
                                     </TableCell>
                                 </TableRow>
                             </TableHead>
@@ -83,10 +117,32 @@ class Clientes extends Component {
                                                 <TableCell>
                                                     {cliente.email}
                                                 </TableCell>
+                                                <TableCell>
+                                                    <Box sx={{ flexShrink: 0, ml: 2.5 }}>
+                                                        <IconButton
+                                                            aria-label="Añadir"
+                                                            color={"success"}
+                                                        >
+                                                            <AddIcon />
+                                                        </IconButton>
+                                                        <IconButton
+                                                            aria-label="Actualizar"
+                                                            color={"warning"}
+                                                        >
+                                                            <UpgradeIcon />
+                                                        </IconButton>
+                                                        <IconButton
+                                                            aria-label="Borrar"
+                                                            color={"error"}
+                                                        >
+                                                            <DeleteIcon />
+                                                        </IconButton>
+                                                    </Box>
+                                                </TableCell>
                                             </TableRow>
                                         </React.Fragment>
-                                    }
-                                )}
+                                    })
+                                }
                             </TableBody>
                         </Table>
                     </TableContainer>
@@ -104,23 +160,6 @@ class Clientes extends Component {
                 "gender": "masculino",
                 "createdAt": "2022-11-24T09:26:12.148Z"
             */
-        }
-        else {
-            return(
-                <React.Fragment>
-                    <Grid
-                        container
-                        spacing={2}
-                        direction='column'
-                        alingItems='center'
-                        style={{minHeight:'100vh'}}
-                    >
-                        <Box>
-                            <CircularProgress color={'inherit'} />
-                        </Box>
-                    </Grid>
-                </React.Fragment>
-            );
         }
     }
 }
