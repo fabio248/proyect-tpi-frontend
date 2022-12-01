@@ -30,21 +30,35 @@ class Pedidos extends Component{
         this.state = {
             pedidos: {},
             hayDatos:false,
-            modalBorrarAbierto:false
+            modalBorrarAbierto:false,
+            idPedido:undefined
         }
 
         this.abrirModalBorrarPedido = this.abrirModalBorrarPedido.bind(this)
         this.cerrarModalBorrarPedido = this.cerrarModalBorrarPedido.bind(this)
-        this.actualizarTablaDePedidos = this.actualizarTablaDePedidos.bind(this)
+        this.borrarPedido = this.borrarPedido.bind(this)
         this.actualizarEstado = this.actualizarEstado.bind(this)
     }
 
 
     actualizarTablaDePedidos(){
-        this.actualizarEstado({},false,false)
-
         this.getPedidos()
+    }
 
+
+    async borrarPedido(){
+
+        const respuesta = await fetch("https://proyecto-tpi.onrender.com/api/v1/tasks/"+this.state.idPedido,
+            {
+            method:"delete",
+            headers:{
+                "api":"78b96cea5c47cf11ae257dd16dd09e809f5bb205c29db1fdde1a33bede7e873b",
+                "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMmJlN2MwZS01Mjc1LTQyNjEtYmZiMC1jMDcxYWE4NGI1NTIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2NjkzNDAzNDd9.yh76A2ekWXODxuAIdsRmdtB9KOr4kdFGtULH9QWlQR8"
+            }
+        })
+
+        console.log(this.state.idPedido)
+        this.actualizarTablaDePedidos()
     }
 
     async getPedidos(){
@@ -59,26 +73,27 @@ class Pedidos extends Component{
 
         respuesta.json()
             .then(
-                value => {this.actualizarEstado(value,true,false)}
+                value => {this.actualizarEstado(value,true,false,undefined)}
             )
     }
 
 
-    actualizarEstado(pedidos,existenDatos,modalBorrarPedidoEstaAbierto){
+    actualizarEstado(pedidos,existenDatos,modalBorrarPedidoEstaAbierto,idPedido){
 
         this.setState( {
             pedidos:pedidos,
             hayDatos: existenDatos,
-            modalBorrarAbierto: modalBorrarPedidoEstaAbierto
+            modalBorrarAbierto: modalBorrarPedidoEstaAbierto,
+            idPedido:idPedido
         })
     }
 
-    abrirModalBorrarPedido(){
-        this.actualizarEstado(this.state.pedidos,this.state.hayDatos,true)
+    abrirModalBorrarPedido(idPedido){
+        this.actualizarEstado(this.state.pedidos,this.state.hayDatos,true,idPedido)
     }
 
     cerrarModalBorrarPedido(){
-        this.actualizarEstado(this.state.pedidos,this.state.hayDatos,false)
+        this.actualizarEstado(this.state.pedidos,this.state.hayDatos,false,undefined)
     }
 
 
@@ -141,11 +156,13 @@ class Pedidos extends Component{
                                                     {new Date(fila.fechaEntrega).toLocaleDateString()}
                                                 </TableCell>
                                                 <TableCell align={"center"}>
-                                                    <Tooltip title={"Borrar pedido"}>
+                                                    <Tooltip title={"Borrar pedido"} >
                                                         <IconButton
                                                             size={"small"}
                                                             color={"error"}
-                                                            onClick={this.abrirModalBorrarPedido}>
+                                                            onClick={() => {this.abrirModalBorrarPedido(fila.id)}}
+
+                                                            >
                                                             <Delete/>
                                                         </IconButton>
                                                     </Tooltip>
@@ -171,11 +188,16 @@ class Pedidos extends Component{
                         </TableBody>
                         <TableFooter>
                             <TableRow>
-                                <TablePagination count={100} page={0} rowsPerPage={10}  labelRowsPerPage={"Filas por pagina"}/>
+                                <TablePagination count={100}
+                                                 page={0}
+                                                 rowsPerPage={10}
+                                                 labelRowsPerPage={"Filas por pagina"}
+                                                 onPageChange={this.actualizarTablaDePedidos}/>
                             </TableRow>
                         </TableFooter>
                     </Table>
                 </TableContainer>
+
 
                 <Dialog
                     open={this.state.modalBorrarAbierto}
@@ -189,16 +211,22 @@ class Pedidos extends Component{
                     </DialogContent>
 
                     <DialogActions>
-                        <Button color={"error"} onClick={this.actualizarTablaDePedidos}>Eliminar</Button>
+                        <Button color={"error"} onClick={this.borrarPedido}>Eliminar</Button>
                         <Button onClick={this.cerrarModalBorrarPedido}>Cancelar</Button>
                     </DialogActions>
 
                 </Dialog>
+
             </>
         )
         }
     }
 
 }
+
+
+
+
+
 
 export default Pedidos;
