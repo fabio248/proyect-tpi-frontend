@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { CircularProgress, Box, IconButton, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip } from "@mui/material";
 import UpdateIcon from "@mui/icons-material/Update";
 import DeleteIcon from "@mui/icons-material/Delete";
-import VisibilityIcon from "@mui/icons-material/Visibility";
+import AddIcon from "@mui/icons-material/Add";
 
 class Clientes extends Component {
 
@@ -34,6 +34,18 @@ class Clientes extends Component {
         }).catch(exp => {
             console.log(exp)
         });
+    }
+
+    add() {
+
+    }
+    
+    update() {
+        
+    }
+
+    delete(params) {
+        
     }
 
     render() {
@@ -118,26 +130,29 @@ class Clientes extends Component {
                                                 </TableCell>
                                                 <TableCell>
                                                     <Box sx={{ flexShrink: 0, ml: 2.5 }}>
-                                                        <Tooltip title={"Visualizar"}>
+                                                        <Tooltip title={"Añadir Pedido"}>
                                                             <IconButton
-                                                                aria-label="Visualizar"
-                                                                color={"primary"}
+                                                                size={"small"}
+                                                                color={"success"}
+                                                                onClick={this.add()}
                                                             >
-                                                                <VisibilityIcon/>
+                                                                <AddIcon/>
                                                             </IconButton>
                                                         </Tooltip>
-                                                        <Tooltip title={"Actualizar"}>
+                                                        <Tooltip title={"Actualizar Cliente"}>
                                                             <IconButton
-                                                                aria-label="Actualizar"
+                                                                size={"small"}
                                                                 color={"warning"}
+                                                                onClick={this.update()}
                                                             >
                                                                 <UpdateIcon />
                                                             </IconButton>
                                                         </Tooltip>
-                                                        <Tooltip title="Borrar">
+                                                        <Tooltip title="Borrar Cliente">
                                                             <IconButton
-                                                                aria-label="Borrar"
+                                                                size={"small"}
                                                                 color={"error"}
+                                                                onClick={this.delete()}
                                                             >
                                                                 <DeleteIcon />
                                                             </IconButton>
@@ -153,18 +168,6 @@ class Clientes extends Component {
                     </TableContainer>
                 </React.Fragment>
             )
-            /*
-                "id": "329d7bed-0f75-4960-a631-d3a5b75fde13",
-                "email": null,
-                "phone": "76686733",
-                "firstName": "Cristo",
-                "secondName": "Rene",
-                "firstLastName": "Romero",
-                "secondLastName": "Gamez",
-                "thirdLastName": null,
-                "gender": "masculino",
-                "createdAt": "2022-11-24T09:26:12.148Z"
-            */
         }
     }
 }
