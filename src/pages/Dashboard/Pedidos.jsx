@@ -57,7 +57,7 @@ class Pedidos extends Component{
             }
         })
 
-        console.log(this.state.idPedido)
+        this.actualizarEstado({},false,false,undefined)
         this.actualizarTablaDePedidos()
     }
 
@@ -113,6 +113,9 @@ class Pedidos extends Component{
                   >
                       <Box >
                         <CircularProgress color={"inherit"}/>
+                      </Box>
+                      <Box>
+                          <h6 color="primary">Obtenido Datos</h6>
                       </Box>
                   </Grid>
                 </>
@@ -190,7 +193,7 @@ class Pedidos extends Component{
                             <TableRow>
                                 <TablePagination count={100}
                                                  page={0}
-                                                 rowsPerPage={10}
+                                                 rowsPerPage={2}
                                                  labelRowsPerPage={"Filas por pagina"}
                                                  onPageChange={this.actualizarTablaDePedidos}/>
                             </TableRow>
