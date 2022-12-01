@@ -32,7 +32,7 @@ class Pedidos extends Component{
             hayDatos:false,
             modalBorrarAbierto:false,
             modalActualizarAbierto:false,
-            pedidoSeleccionado:undefined
+            pedidoSeleccionado: {}
         }
 
         this.abrirModalBorrarPedido = this.abrirModalBorrarPedido.bind(this)
@@ -192,6 +192,7 @@ class Pedidos extends Component{
                                                     <Tooltip title={"Actualizar pedido"}>
                                                         <IconButton
                                                             size={"small"}
+
                                                             onClick={()=>{this.abrirModalActualizarPedido(fila)}}
                                                             >
                                                             <Update/>
@@ -235,13 +236,17 @@ class Pedidos extends Component{
 
                 </Dialog>
 
-                <Dialog
+                { (this.state.pedidoSeleccionado)?
+                    <Dialog
                     open={this.state.modalActualizarAbierto}
                     onClose={this.cerrarModalActualizarPedido}>
                     <DialogContent>
-                        <DialogContentText>A ver</DialogContentText>
+                    <DialogContentText>{this.state.pedidoSeleccionado.type}</DialogContentText>
                     </DialogContent>
-                </Dialog>
+                    </Dialog>:<></>
+
+                }
+
 
             </React.Fragment>
         )
