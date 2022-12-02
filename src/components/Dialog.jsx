@@ -7,7 +7,12 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Typography } from '@mui/material';
 
-export default function AlertDialog({ title, description, state }) {
+export default function AlertDialog({
+  title,
+  description,
+  state,
+  redirecTo = '#',
+}) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -34,7 +39,7 @@ export default function AlertDialog({ title, description, state }) {
           <Typography variant='body1'>{description}</Typography>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} autoFocus>
+          <Button onClick={handleClose} autoFocus href={redirecTo}>
             Ok
           </Button>
         </DialogActions>

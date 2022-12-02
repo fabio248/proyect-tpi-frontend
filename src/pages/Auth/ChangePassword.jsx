@@ -58,7 +58,10 @@ function ChangePassword() {
     setLoading(true);
     setOpenDialog(false);
     const rta = validarPassword(values.contraseña1, values.contraseña2);
-    if (!rta) return;
+    if (!rta) {
+      setLoading(false);
+      return;
+    }
 
     //Obteniendo token de los query params
     const token = query.get('token');
@@ -178,6 +181,7 @@ function ChangePassword() {
                         title='Contraseña restablecida'
                         description={`Se restablecido la contraseña`}
                         state={openDialog}
+                        redirecTo='/login'
                       />
                     ) : null}
                     <Grid container spacing={2}>
