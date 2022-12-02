@@ -1,7 +1,10 @@
 import React, { Component } from "react";
-import { CircularProgress, Button, Box, IconButton, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip } from "@mui/material";
-import { Update, Delete, Add } from "@mui/icons-material";
-import { Dialog, DialogContent, DialogContentText, DialogTitle, DialogActions} from "@mui/material";
+import dayjs from 'dayjs';
+import { CircularProgress, Button, Box, IconButton, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip, InputLabel, MenuItem } from "@mui/material";
+import { Update, Delete, Add, Send } from "@mui/icons-material";
+import { FormControl, TextField, Select, Dialog, DialogContent, DialogContentText, DialogTitle, DialogActions} from "@mui/material";
+import { DesktopDatePicker, LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import AlertError from '../../components/AlertError';
 
 class Clientes extends Component {
@@ -12,6 +15,7 @@ class Clientes extends Component {
         this.state = {
             error:false,
             mensajeError:"",
+            fecha: dayjs(),
             clientes:{},
             nulo:true,
             estadoModalPedido:false,
@@ -108,8 +112,14 @@ class Clientes extends Component {
     cerrarAgregarPedido() {
         this.setState({
             estadoModalPedido:false,
-            clienteSeleccionado:undefined,
         });
+    }
+
+    fechaAgregarPedido(nuevaFecha) {
+        console.log(nuevaFecha);
+        this.setState({
+            fecha:nuevaFecha,
+        })
     }
     /* ----------------------------------------------------------- *
         FIN DEL BLOQUE DE CODIGO
@@ -153,7 +163,7 @@ class Clientes extends Component {
                             </h3>
                         </div>
                         <div className="container m-1 p-1">
-                            <Button variant="outlined" color="success">
+                            <Button variant="contained" color="success">
                                 Agregar Cliente
                             </Button>
                         </div>
@@ -240,17 +250,54 @@ class Clientes extends Component {
                             </TableBody>
                         </Table>
                     </TableContainer>
-
-                    <Dialog open={this.state.estadoModalPedido} onClose={() => this.cerrarAgregarPedido()} aria-describedby="">
-                        <DialogTitle>Formulario de Pedido</DialogTitle>
-                        <DialogContent>
-                            <DialogContentText id="" color="black">ZzZz</DialogContentText>
-                        </DialogContent>
-                        <DialogActions>
-                            <Button onClick={() => this.cerrarAgregarPedido()}>Cancelar</Button>
-                            <Button variant="outlined" color={"error"} onClick={() => this.agregarPedido()}>Eliminar</Button>
-                        </DialogActions>
-                    </Dialog>
+                    {!this.state.nulo && (
+                        <Dialog open={this.state.estadoModalPedido} onClose={() => this.cerrarAgregarPedido()} aria-describedby="">
+                            <DialogTitle>Formulario de Pedido</DialogTitle>
+                                <DialogContent>
+                                    <DialogContentText id="" color="black">Rellene el siguiente formulario</DialogContentText>
+                                    <Box className="p-3" sx={{minWidth: 120}}>
+                                        <FormControl fullWidth>
+                                            <InputLabel id="type">Tipo de Prenda</InputLabel>
+                                                {this.state.clienteSeleccionado.gender == "Femenino" ?
+                                                    <Select labelId="type">
+                                                        <MenuItem value={"Vestido"}>Vestido</MenuItem>
+                                                        <MenuItem value={"Blusa"}>Blusa</MenuItem>
+                                                        <MenuItem value={"Camisa"}>Camisa</MenuItem>
+                                                        <MenuItem value={"Chaqueta: Cuero"}>Chaqueta: Cuero</MenuItem>
+                                                    </Select>
+                                                    :
+                                                    <Select> 
+                                                        <MenuItem value={"Traje: Dos piezas"}>Traje: Dos piezas</MenuItem>
+                                                        <MenuItem value={"Traje: Tres piezas"}>Traje: Tres piezas</MenuItem>
+                                                        <MenuItem value={"Camisa"}>Camisa</MenuItem>
+                                                        <MenuItem value={"Chaqueta: Cuero"}>Chaqueta: Cuero</MenuItem>
+                                                    </Select>
+                                                }
+                                                <Box className="m-3">
+                                                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                                        <DesktopDatePicker
+                                                            disablePast={true}
+                                                            label="Responsive"
+                                                            openTo="year"
+                                                            views={['year', 'month', 'day']}
+                                                            inputFormat="DD/MM/YYYY"
+                                                            value={this.state.fecha}
+                                                            onChange={(newValue) => {
+                                                                this.fechaAgregarPedido(newValue);
+                                                            }}
+                                                            renderInput={(params) => <TextField {...params} />}
+                                                        />
+                                                    </LocalizationProvider>
+                                                </Box>
+                                        </FormControl>
+                                    </Box>
+                                </DialogContent>
+                            <DialogActions>
+                                <Button variant="contained" color="primary" onClick={() => this.cerrarAgregarPedido()}>Cancelar</Button>
+                                <Button variant="contained" endIcon={<Send />} color="success" onClick={() => this.agregarPedido()}>Enviar</Button>
+                            </DialogActions>
+                        </Dialog>
+                    )}
                 </React.Fragment>
             )
         }
