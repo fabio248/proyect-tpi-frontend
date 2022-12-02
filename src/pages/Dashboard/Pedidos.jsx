@@ -1,15 +1,14 @@
-import React, {Component, useState} from "react";
+import React, {Component} from "react";
 import {
     TableContainer,
     Table,
     TableBody,
     Box,
-    Typography,
     Grid,
     TableRow,
     TableCell,
     TableHead,
-    TableFooter, TablePagination, Button, Tooltip, IconButton, Modal, Alert
+    Button, Tooltip, IconButton,
 } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 import {Add, Delete, Update, Visibility} from "@mui/icons-material";
@@ -254,10 +253,5 @@ class Pedidos extends Component{
     }
 
 }
-
-
-
-
-
 
 export default Pedidos;

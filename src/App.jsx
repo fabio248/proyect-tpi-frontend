@@ -10,7 +10,7 @@ import Clientes from './pages/Dashboard/Clientes';
 import Usuarios from './pages/Dashboard/Users';
 import ChangePassword from './pages/Auth/ChangePassword';
 import ForgotPassword from './pages/Auth/ForgotPassword';
-import Pedido from './pages/Dashboard/Pedido';
+import Pedidos from './pages/Dashboard/Pedidos';
 
 const validateRole = () => {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -50,7 +50,7 @@ function App() {
             path='/dashboard-admin/pedidos'
             element={
               <Dashboard>
-                <Pedido />
+                <Pedidos />
               </Dashboard>
             }
           ></Route>

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import dayjs from 'dayjs';
 import { CircularProgress, Button, Box, IconButton, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip, InputLabel, MenuItem } from "@mui/material";
-import { Update, Delete, Add, Send } from "@mui/icons-material";
+import { Visibility, Update, Delete, Add, Send } from "@mui/icons-material";
 import { FormControl, TextField, Select, Dialog, DialogContent, DialogContentText, DialogTitle, DialogActions} from "@mui/material";
 import { DesktopDatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -11,11 +11,12 @@ class Clientes extends Component {
 
     constructor(props) {
         super(props);
-
+        // PROPS
         this.state = {
             error:false,
             mensajeError:"",
             fecha: dayjs(),
+            pedido:"",
             clientes:{},
             nulo:true,
             estadoModalPedido:false,
@@ -57,6 +58,10 @@ class Clientes extends Component {
 
     }
     
+    view() {
+
+    }
+
     update() {
         
     }
@@ -112,14 +117,20 @@ class Clientes extends Component {
     cerrarAgregarPedido() {
         this.setState({
             estadoModalPedido:false,
+            pedido:"",
         });
     }
 
     fechaAgregarPedido(nuevaFecha) {
-        console.log(nuevaFecha);
         this.setState({
             fecha:nuevaFecha,
         })
+    }
+
+    tipoAgregarPedido(tipoPedido) {
+        this.setState({
+            pedido:tipoPedido,
+        });
     }
     /* ----------------------------------------------------------- *
         FIN DEL BLOQUE DE CODIGO
@@ -223,6 +234,15 @@ class Clientes extends Component {
                                                                 <Add />
                                                             </IconButton>
                                                         </Tooltip>
+                                                        <Tooltip title="Visualizar Cliente">
+                                                            <IconButton
+                                                                size={"small"}
+                                                                color={"primary"}
+                                                                onClick={this.view()}
+                                                            >
+                                                                <Visibility />
+                                                            </IconButton>
+                                                        </Tooltip>
                                                         <Tooltip title={"Actualizar Cliente"}>
                                                             <IconButton
                                                                 size={"small"}
@@ -251,44 +271,76 @@ class Clientes extends Component {
                         </Table>
                     </TableContainer>
                     {!this.state.nulo && (
-                        <Dialog open={this.state.estadoModalPedido} onClose={() => this.cerrarAgregarPedido()} aria-describedby="">
-                            <DialogTitle>Formulario de Pedido</DialogTitle>
+                        <Dialog open={this.state.estadoModalPedido} onClose={() => this.cerrarAgregarPedido()} aria-describedby="Agregar Pedido">
+                            <DialogTitle className="text-center text-uppercase">Agregar un Pedido</DialogTitle>
                                 <DialogContent>
-                                    <DialogContentText id="" color="black">Rellene el siguiente formulario</DialogContentText>
-                                    <Box className="p-3" sx={{minWidth: 120}}>
+                                    <Box className="p-1 m-2">
+                                        <DialogContentText>
+                                            <div className="mb-1 p-1">
+                                                <p className="primary"><strong>Datos del Cliente</strong></p>
+                                            </div>
+                                        </DialogContentText>
+                                        <DialogContentText id="" color="black">
+                                            <div className="mb-1 p-1">
+                                                <p className="primary"><strong>Nombres:</strong> {this.state.clienteSeleccionado.firstName} {this.state.clienteSeleccionado.secondName}</p>
+                                                <p className="primary"><strong>Apellidos:</strong> {this.state.clienteSeleccionado.firstLastName} {this.state.clienteSeleccionado.secondLastName}</p>
+                                                <p className="primary"><strong>Género:</strong> {this.state.clienteSeleccionado.gender}</p>
+                                            </div>
+                                        </DialogContentText>
+                                        <DialogContentText>
+                                            <div className="mb-1 p-1">
+                                                <p className="primary"><strong>Opciones del Pedido</strong></p>
+                                            </div>
+                                        </DialogContentText>
                                         <FormControl fullWidth>
                                             <InputLabel id="type">Tipo de Prenda</InputLabel>
+                                            <div className="mb-1 p-1">
                                                 {this.state.clienteSeleccionado.gender == "Femenino" ?
-                                                    <Select labelId="type">
-                                                        <MenuItem value={"Vestido"}>Vestido</MenuItem>
+                                                    <Select
+                                                        className="w-100"
+                                                        labelId="type"
+                                                        label="Tipo de Prenda"
+                                                        value={this.state.pedido === "" ? "Vestido" : this.state.pedido}
+                                                        onChange={(newValue) => {this.tipoAgregarPedido(newValue.target.value)}}
+                                                    >
+                                                        <MenuItem selected value={"Vestido"}>Vestido</MenuItem>
                                                         <MenuItem value={"Blusa"}>Blusa</MenuItem>
                                                         <MenuItem value={"Camisa"}>Camisa</MenuItem>
                                                         <MenuItem value={"Chaqueta: Cuero"}>Chaqueta: Cuero</MenuItem>
                                                     </Select>
                                                     :
-                                                    <Select> 
-                                                        <MenuItem value={"Traje: Dos piezas"}>Traje: Dos piezas</MenuItem>
+                                                    <Select
+                                                        className="w-100"
+                                                        labelId="type"
+                                                        label="Tipo de Prenda"
+                                                        value={this.state.pedido === "" ? "Camisa" : this.state.pedido}
+                                                        onChange={(newValue) => this.tipoAgregarPedido(newValue.target.value)}
+                                                    >
+                                                        <MenuItem selected value={"Traje: Dos piezas"}>Traje: Dos piezas</MenuItem>
                                                         <MenuItem value={"Traje: Tres piezas"}>Traje: Tres piezas</MenuItem>
                                                         <MenuItem value={"Camisa"}>Camisa</MenuItem>
                                                         <MenuItem value={"Chaqueta: Cuero"}>Chaqueta: Cuero</MenuItem>
                                                     </Select>
                                                 }
-                                                <Box className="m-3">
-                                                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                                        <DesktopDatePicker
-                                                            disablePast={true}
-                                                            label="Responsive"
-                                                            openTo="year"
-                                                            views={['year', 'month', 'day']}
-                                                            inputFormat="DD/MM/YYYY"
-                                                            value={this.state.fecha}
-                                                            onChange={(newValue) => {
-                                                                this.fechaAgregarPedido(newValue);
-                                                            }}
-                                                            renderInput={(params) => <TextField {...params} />}
-                                                        />
-                                                    </LocalizationProvider>
-                                                </Box>
+                                            </div>
+                                            <div className="mb-1 p-1">
+                                                <InputLabel id="type">Tipo de Prenda</InputLabel>
+                                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                                    <DesktopDatePicker
+                                                        disablePast={true}
+                                                        labelId="fecha_entrega"
+                                                        label="Fecha de Entrega"
+                                                        openTo="year"
+                                                        views={['month', 'day']}
+                                                        inputFormat="DD/MM/YYYY"
+                                                        value={this.state.fecha}
+                                                        onChange={(newValue) => {
+                                                            this.fechaAgregarPedido(newValue);
+                                                        }}
+                                                        renderInput={(params) => <TextField {...params} />}
+                                                    />
+                                                </LocalizationProvider>
+                                            </div>
                                         </FormControl>
                                     </Box>
                                 </DialogContent>
