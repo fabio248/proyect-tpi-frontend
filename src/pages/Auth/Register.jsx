@@ -17,34 +17,32 @@ function Register() {
 
   const {
     register,
-    formState: { errors },
+    formState,
+    formState: { errors, isSubmitSuccessful },
     handleSubmit,
     watch,
     getValues,
     setValue,
+    reset,
   } = useForm([]);
 
   const onSubmit = (data) => {
-    const datos = getValues("datos");
-
     if (medidas == "Masculino") {
       const medidaParteSuperiorHombre = getValues("medidaParteSuperiorHombre");
       medidaParteSuperiorHombre.id = uuidv4();
       const medidaParteInferiorHombre = getValues("medidaParteInferiorHombre");
       medidaParteInferiorHombre.id = uuidv4();
 
-
       var postData = {
-        firstName:datos.firstName,
-        secondName:datos.secondName,
-        firstLastName:datos.firstLastName,
-        secondLastName:datos.secondLastName,
-        phone:datos.phone,
-        gender:datos.gender,
+        firstName: data.firstName,
+        secondName: data.secondName,
+        firstLastName: data.firstLastName,
+        secondLastName: data.secondLastName,
+        phone: data.phone,
+        gender: data.gender,
         medidaParteSuperiorHombre,
         medidaParteInferiorHombre,
       };
-
     } else {
       const medidasParteSuperiorMujer = getValues("medidasParteSuperiorMujer");
       medidasParteSuperiorMujer.id = uuidv4();
@@ -52,17 +50,19 @@ function Register() {
       medidasParteInferiorMujer.id = uuidv4();
 
       var postData = {
-        firstName:datos.firstName,
-        secondName:datos.secondName,
-        firstLastName:datos.firstLastName,
-        secondLastName:datos.secondLastName,
-        phone:datos.phone,
-        gender:datos.gender,
+        firstName: data.firstName,
+        secondName: data.secondName,
+        firstLastName: data.firstLastName,
+        secondLastName: data.secondLastName,
+        phone: data.phone,
+        gender: data.gender,
         medidasParteSuperiorMujer,
         medidasParteInferiorMujer,
       };
     }
+    // console.log(postData);
 
+    //Envio a back
     axios
       .post(urlClientes, postData, axiosConfig)
       .then((res) => {
@@ -71,9 +71,18 @@ function Register() {
       .catch((err) => {
         console.error("AXIOS ERROR: ", err);
       });
+      console.log(enviado);
   };
 
-  const medidas = watch("datos.gender");
+  //Si se envia correctamente, resetea los campos
+  React.useEffect(()=>{
+    if(formState.isSubmitSuccessful){
+      reset();
+    }
+  }, [formState, reset])
+
+  //Mostrar medidas masculinas o femeninas
+  const medidas = watch("gender");
 
   return (
     <div>
@@ -83,8 +92,8 @@ function Register() {
           <label>Nombres</label>
           <input
             type="text"
-            {...register("datos.firstName", {
-              required: "El campo es requerido",
+            {...register("firstName", {
+              required: "Su primer nombre es requerido",
               pattern: {
                 value: /^[a-zA-ZÀ-ÿ\s]{1,40}$/,
                 message: "Debe contener unicamente letras",
@@ -97,33 +106,74 @@ function Register() {
           )}
           <input
             type="text"
-            {...register("datos.secondName")}
+            {...register("secondName", {
+              pattern: {
+                value: /^[a-zA-ZÀ-ÿ\s]{1,40}$/,
+                message: "Debe contener unicamente letras",
+              },
+            })}
             placeholder="Segundo nombre"
           />
+          {errors.secondName && (
+            <p className="errorMsg">{errors.secondName.message}</p>
+          )}
         </div>
         <div>
           <label>Apellidos:</label>
           <input
             type="text"
-            {...register("datos.firstLastName")}
+            {...register("firstLastName", {
+              required: "Su primer apellido es requerido",
+              pattern: {
+                value: /^[a-zA-ZÀ-ÿ\s]{1,40}$/,
+                message: "Debe contener unicamente letras",
+              },
+            })}
             placeholder="Primer apellido"
           />
+          {errors.firstLastName && (
+            <p className="errorMsg">{errors.firstLastName.message}</p>
+          )}
           <input
             type="text"
-            {...register("datos.secondLastName")}
+            {...register("secondLastName", {
+              pattern: {
+                value: /^[a-zA-ZÀ-ÿ\s]{1,40}$/,
+                message: "Debe contener unicamente letras",
+              },
+            })}
             placeholder="Segundo apelido"
           />
+          {errors.secondLastName && (
+            <p className="errorMsg">{errors.secondLastName.message}</p>
+          )}
         </div>
         <div>
           <label>Telefono:</label>
-          <input type="number" {...register("datos.phone")} />
+          <input
+            type="number"
+            {...register("phone", {
+              required: "Debe ingresar su numero de telefono",
+              pattern: {
+                value: /^\d{8}$/,
+                message: "Ingrese un numero de telefono valido (8 digitos)",
+              },
+            })}
+          />
+          {errors.phone && <p className="errorMsg">{errors.phone.message}</p>}
         </div>
         <div>
           <label>Genero:</label>
-          <input type="radio" value="Masculino" {...register("datos.gender")} />
-          Masculino
-          <input type="radio" value="Femenino" {...register("datos.gender")} />
-          Femenino
+          <select
+            {...register("gender", {
+              validate: (value) => value !== "",
+            })}
+          >
+            <option defaultValue="Select"></option>
+            <option value="Masculino">Masculino</option>
+            <option value="Femenino">Femenino</option>
+          </select>
+          {errors.gender && <p>Debe seleccionar un genero</p>}
         </div>
         {medidas == "Masculino" && (
           <div>
@@ -133,149 +183,254 @@ function Register() {
             <div>
               <label>Hombro:</label>
               <input
-                type="number"
-                {...register("medidaParteSuperiorHombre.hombro")}
+                type="text"
+                {...register("medidaParteSuperiorHombre.hombro", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
             <div>
               <label>Largo camisa:</label>
               <input
-                type="number"
-                {...register("medidaParteSuperiorHombre.largoCamisa")}
+                type="text"
+                {...register("medidaParteSuperiorHombre.largoCamisa", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
             <div>
               <label>Ancho cuello:</label>
               <input
-                type="number"
-                {...register("medidaParteSuperiorHombre.anchoCuello")}
+                type="text"
+                {...register("medidaParteSuperiorHombre.anchoCuello", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
             <div>
               <label>Talle frente:</label>
               <input
-                type="number"
-                {...register("medidaParteSuperiorHombre.talleFrente")}
+                type="text"
+                {...register("medidaParteSuperiorHombre.talleFrente", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
             <div>
               <label>Frente pecho:</label>
               <input
-                type="number"
-                {...register("medidaParteSuperiorHombre.frentePecho")}
+                type="text"
+                {...register("medidaParteSuperiorHombre.frentePecho", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
             <div>
               <label>Talle espalda:</label>
               <input
-                type="number"
-                {...register("medidaParteSuperiorHombre.talleEspalda")}
+                type="text"
+                {...register("medidaParteSuperiorHombre.talleEspalda", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
             <div>
               <label>Boca manga:</label>
               <input
-                type="number"
-                {...register("medidaParteSuperiorHombre.bocaManga")}
+                type="text"
+                {...register("medidaParteSuperiorHombre.bocaManga", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
             <div>
               <label>Sisa camisa:</label>
               <input
-                type="number"
-                {...register("medidaParteSuperiorHombre.sisaCamisa")}
+                type="text"
+                {...register("medidaParteSuperiorHombre.sisaCamisa", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
             <div>
               <label>Primer boton:</label>
               <input
-                type="number"
-                {...register("medidaParteSuperiorHombre.primerBoton")}
+                type="text"
+                {...register("medidaParteSuperiorHombre.primerBoton", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
             <div>
               <label>Largo manga:</label>
               <input
-                type="number"
-                {...register("medidaParteSuperiorHombre.largoManga")}
+                type="text"
+                {...register("medidaParteSuperiorHombre.largoManga", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
             <div>
               <label>Hombro a codo:</label>
               <input
-                type="number"
-                {...register("medidaParteSuperiorHombre.hombroACodo")}
+                type="text"
+                {...register("medidaParteSuperiorHombre.hombroACodo", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
             <div>
               <label>Ancho brazo:</label>
               <input
-                type="number"
-                {...register("medidaParteSuperiorHombre.anchoBrazo")}
+                type="text"
+                {...register("medidaParteSuperiorHombre.anchoBrazo", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
             <div>
               <label>Cintura:</label>
               <input
-                type="number"
-                {...register("medidaParteSuperiorHombre.cintura")}
+                type="text"
+                {...register("medidaParteSuperiorHombre.cintura", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
             <div>
               <label>Cadera:</label>
               <input
-                type="number"
-                {...register("medidaParteSuperiorHombre.cadera")}
+                type="text"
+                {...register("medidaParteSuperiorHombre.cadera", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
             <div>
               <label>Espalda:</label>
               <input
-                type="number"
-                {...register("medidaParteSuperiorHombre.espalda")}
+                type="text"
+                {...register("medidaParteSuperiorHombre.espalda", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
             <h2>Parte inferior</h2>
             <div>
               <label>Largo pantalon:</label>
               <input
-                type="number"
-                {...register("medidaParteInferiorHombre.largoPantalon")}
+                type="text"
+                {...register("medidaParteInferiorHombre.largoPantalon", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
             <div>
               <label>Ancho rodilla:</label>
               <input
-                type="number"
-                {...register("medidaParteInferiorHombre.anchoRodilla")}
+                type="text"
+                {...register("medidaParteInferiorHombre.anchoRodilla", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
             <div>
               <label>Ancho tobillo:</label>
               <input
-                type="number"
-                {...register("medidaParteInferiorHombre.anchoTobillo")}
+                type="text"
+                {...register("medidaParteInferiorHombre.anchoTobillo", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
             <div>
               <label>Cintura a rodilla:</label>
               <input
-                type="number"
-                {...register("medidaParteInferiorHombre.cinturaARodilla")}
+                type="text"
+                {...register("medidaParteInferiorHombre.cinturaARodilla", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
             <div>
               <label>Tiro:</label>
               <input
-                type="number"
-                {...register("medidaParteInferiorHombre.tiro")}
+                type="text"
+                {...register("medidaParteInferiorHombre.tiro", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
             <div>
               <label>Cadera:</label>
               <input
-                type="number"
-                {...register("medidaParteInferiorHombre.cadera")}
+                type="text"
+                {...register("medidaParteInferiorHombre.cadera", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
           </div>
@@ -287,128 +442,218 @@ function Register() {
             <div>
               <label>Largo blusa:</label>
               <input
-                type="number"
-                {...register("medidasParteSuperiorMujer.largoBlusa")}
+                type="text"
+                {...register("medidasParteSuperiorMujer.largoBlusa", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
             <div>
               <label>Escote:</label>
               <input
-                type="number"
-                {...register("medidasParteSuperiorMujer.escote")}
+                type="text"
+                {...register("medidasParteSuperiorMujer.escote", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
             <div>
               <label>Hombro:</label>
               <input
-                type="number"
-                {...register("medidasParteSuperiorMujer.hombro")}
+                type="text"
+                {...register("medidasParteSuperiorMujer.hombro", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
             <div>
               <label>Talle:</label>
               <input
-                type="number"
-                {...register("medidasParteSuperiorMujer.talle")}
+                type="text"
+                {...register("medidasParteSuperiorMujer.talle", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
             <div>
               <label>Busto:</label>
               <input
-                type="number"
-                {...register("medidasParteSuperiorMujer.busto")}
+                type="text"
+                {...register("medidasParteSuperiorMujer.busto", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
             <div>
               <label>Sisa:</label>
               <input
-                type="number"
-                {...register("medidasParteSuperiorMujer.sisa")}
+                type="text"
+                {...register("medidasParteSuperiorMujer.sisa", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
             <div>
               <label>Manga:</label>
               <input
-                type="number"
-                {...register("medidasParteSuperiorMujer.manga")}
+                type="text"
+                {...register("medidasParteSuperiorMujer.manga", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
             <div>
               <label>Costado:</label>
               <input
-                type="number"
-                {...register("medidasParteSuperiorMujer.costado")}
+                type="text"
+                {...register("medidasParteSuperiorMujer.costado", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
             <div>
               <label>Espalda:</label>
               <input
-                type="number"
-                {...register("medidasParteSuperiorMujer.espalda")}
+                type="text"
+                {...register("medidasParteSuperiorMujer.espalda", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
             <div>
               <label>Primer boton:</label>
               <input
-                type="number"
-                {...register("medidasParteSuperiorMujer.primerBoton")}
+                type="text"
+                {...register("medidasParteSuperiorMujer.primerBoton", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
             <div>
               <label>Cintura:</label>
               <input
-                type="number"
-                {...register("medidasParteSuperiorMujer.cintura")}
+                type="text"
+                {...register("medidasParteSuperiorMujer.cintura", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
             <div>
               <label>Cadera:</label>
               <input
-                type="number"
-                {...register("medidasParteSuperiorMujer.cadera")}
+                type="text"
+                {...register("medidasParteSuperiorMujer.cadera", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
             <h2>Parte inferior</h2>
             <div>
               <label>Largo pantalon:</label>
               <input
-                type="number"
-                {...register("medidasParteInferiorMujer.largoPantalon")}
+                type="text"
+                {...register("medidasParteInferiorMujer.largoPantalon", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
             <div>
               <label>Ancho rodilla:</label>
               <input
-                type="number"
-                {...register("medidasParteInferiorMujer.anchoRodilla")}
+                type="text"
+                {...register("medidasParteInferiorMujer.anchoRodilla", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
             <div>
               <label>Ancho tobillo:</label>
               <input
-                type="number"
-                {...register("medidasParteInferiorMujer.anchoTobillo")}
+                type="text"
+                {...register("medidasParteInferiorMujer.anchoTobillo", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
             <div>
               <label>Cintura a rodilla:</label>
               <input
-                type="number"
-                {...register("medidasParteInferiorMujer.cinturaARodilla")}
+                type="text"
+                {...register("medidasParteInferiorMujer.cinturaARodilla", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
             <div>
               <label>Tiro:</label>
               <input
-                type="number"
-                {...register("medidasParteInferiorMujer.tiro")}
+                type="text"
+                {...register("medidasParteInferiorMujer.tiro", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
             <div>
               <label>Cadera:</label>
               <input
-                type="number"
-                {...register("medidasParteInferiorMujer.cadera")}
+                type="text"
+                {...register("medidasParteInferiorMujer.cadera", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]+(.[0-9]+)?$/,
+                  },
+                })}
               />
             </div>
           </div>
