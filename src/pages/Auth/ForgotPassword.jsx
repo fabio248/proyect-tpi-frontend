@@ -125,11 +125,7 @@ function ForgotPassword() {
                           </Button>
                         </Grid>
                         <Grid item>
-                          <Button
-                            type='submit'
-                            variant='contained'
-                            // sx={{ background: '#ffc801' }}
-                          >
+                          <Button type='submit' variant='contained'>
                             ENVIAR
                           </Button>
                           <Loading openLoader={loading}></Loading>

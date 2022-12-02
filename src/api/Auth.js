@@ -11,7 +11,23 @@ export default class Auth {
       const response = await axios.post(`${this.endpoint}/recovery`, email, {
         headers: this.headers,
       });
-      console.log(response);
+      return response;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+  async changePassword(newPassword, token) {
+    try {
+      const response = await axios.post(
+        `${this.endpoint}/change-password`,
+        {
+          token,
+          newPassword,
+        },
+        {
+          headers: this.headers,
+        }
+      );
       return response;
     } catch (error) {
       throw new Error(error);

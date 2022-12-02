@@ -29,7 +29,6 @@ function App() {
         <Route path='/logout' element={<Logout />}></Route>
         <Route path='/cambiar-contraseña' element={<ChangePassword />}></Route>
         <Route path='/olvidar-contraseña' element={<ForgotPassword />}></Route>
-        <Route path='/pedidos' element={<Pedidos />}></Route>
         <Route
           element={
             <RequireAuth
@@ -51,7 +50,7 @@ function App() {
             path='/dashboard-admin/pedidos'
             element={
               <Dashboard>
-                <Pedidos/>
+                <Pedido />
               </Dashboard>
             }
           ></Route>
