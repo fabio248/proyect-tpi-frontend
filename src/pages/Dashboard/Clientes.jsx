@@ -11,18 +11,31 @@ class Clientes extends Component {
 
     constructor(props) {
         super(props);
-        // PROPS
+        /*
+            >>PROPS<<
+            Nota: Si necesita agregar más, considere documentar
+            y agregarlos al final del bloque.
+        */
         this.state = {
+            // Variables Clave {Clientes.jsx}
+            clientes:{},
+            nulo:true,
+            // Clientes.jsx {Agregar Pedido}
             error:false,
             mensajeError:"",
             fecha: dayjs(),
             pedido:"",
-            clientes:{},
-            nulo:true,
             estadoModalPedido:false,
             clienteSeleccionado:{},
+            // {Agregar Pedido}
         };
     }
+
+    /* ----------------------------------------------------------- *
+        BLOQUE DE CODIGO: CLIENTES.
+        NOTA: Incluye las operaciones necesarias 
+        para procesar los datos de los clientes.
+    * ------------------------------------------------------------ */
 
     // Obtiene los clientes
     async getClientes() {
@@ -30,7 +43,7 @@ class Clientes extends Component {
             method:"GET",
             headers: {
                 "Content-Type": "application/json",
-                "API":"78b96cea5c47cf11ae257dd16dd09e809f5bb205c29db1fdde1a33bede7e873b",
+                "API": "78b96cea5c47cf11ae257dd16dd09e809f5bb205c29db1fdde1a33bede7e873b",
                 "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMmJlN2MwZS01Mjc1LTQyNjEtYmZiMC1jMDcxYWE4NGI1NTIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2NjkzNDAzNDd9.yh76A2ekWXODxuAIdsRmdtB9KOr4kdFGtULH9QWlQR8",
             }
         }).then(async response => {
@@ -45,10 +58,9 @@ class Clientes extends Component {
                 clientes: data,
                 nulo: false,
             })
-        })
-        .catch(error => {
+        }).catch(error => {
             this.setState({ 
-                errorMessage: error.toString(),
+                mensajeError: error.toString(),
                 error: true, 
             });
         });
@@ -66,45 +78,62 @@ class Clientes extends Component {
         
     }
 
-    delete(params) {
+    delete() {
         
     }
 
     updateTable() {
         this.getClientes();
     }
+    /* ----------------------------------------------------------- *
+        FIN DEL BLOQUE DE CODIGO
+    * ------------------------------------------------------------ */
 
     /* ----------------------------------------------------------- *
         BLOQUE DE CODIGO: AGREGAR PEDIDO.
         NOTA: Incluye controles del formulario modal.
     * ------------------------------------------------------------ */
     async agregarPedido() {
-        fetch("https://proyecto-tpi.onrender.com/api/v1/clients", {
-            method:"POST",
-            headers: {
-                "Content-Type": "application/json",
-                "API":"78b96cea5c47cf11ae257dd16dd09e809f5bb205c29db1fdde1a33bede7e873b",
-                "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMmJlN2MwZS01Mjc1LTQyNjEtYmZiMC1jMDcxYWE4NGI1NTIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2NjkzNDAzNDd9.yh76A2ekWXODxuAIdsRmdtB9KOr4kdFGtULH9QWlQR8",
-            }
-        }).then(async response => {
-            const data = await response.json();
-            // Verifica el estado de la respuesta
-            if (!response.ok) {
-                // Obtiene el error de la respuesta y rechaza la promesa
-                const error = (data && data.message) || response.statusText;
-                return Promise.reject(error);
-            }
-            this.setState({ 
-                clientes: data,
-                nulo: false,
-            })
-        })
-        .catch(error => {
-            this.setState({ 
-                errorMessage: error.toString(),
-                error: true, 
+
+        if(!(this.state.pedido === "") && dayjs(this.state.fecha).isValid()) {
+            fetch("https://proyecto-tpi.onrender.com/api/v1/tasks", {
+                mode: "no-cors",
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "API":"78b96cea5c47cf11ae257dd16dd09e809f5bb205c29db1fdde1a33bede7e873b",
+                    "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMmJlN2MwZS01Mjc1LTQyNjEtYmZiMC1jMDcxYWE4NGI1NTIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2NjkzNDAzNDd9.yh76A2ekWXODxuAIdsRmdtB9KOr4kdFGtULH9QWlQR8",
+                },
+                body: {
+                    "clienteId":  this.state.clienteSeleccionado.id,
+                    "fechaEntrega": this.state.fecha,
+                    "type": this.state.pedido,
+                }
+            }).then(async response => {
+                const data = await response.json();
+                // Verifica el estado de la respuesta
+                if (!response.ok) {
+                    // Obtiene el error de la respuesta y rechaza la promesa
+                    const error = (data && data.message) || response.statusText;
+                    return Promise.reject(error);
+                }
+                this.setState({ 
+                    clientes:data,
+                    nulo:false,
+                })
+            }).catch(error => {
+                this.setState({ 
+                    mensajeError:error.toString(),
+                    error:true, 
+                });
             });
-        });
+        }
+        else {
+            this.setState({
+                mensajeError:"Inconsistencia en los datos.\nSeleccione una prenda o ingrese una fecha valida!",
+                error:true,
+            });
+        }
     }
 
     abrirAgregarPedido(cliente) {
@@ -135,6 +164,11 @@ class Clientes extends Component {
     /* ----------------------------------------------------------- *
         FIN DEL BLOQUE DE CODIGO
     * ------------------------------------------------------------ */
+
+    /* ----------------------------------------------------------- *
+        BLOQUE DE CODIGO: RENDER.
+        NOTA: Devuelve el componente contruido.
+    * ------------------------------------------------------------ */
     render() {
 
         if(this.state.nulo) {
@@ -143,6 +177,9 @@ class Clientes extends Component {
 
             return(
                 <React.Fragment>
+                    {this.state.error && (
+                        <AlertError message={this.state.mensajeError} />
+                    )}
                     <Grid
                         container
                         spacing={0}
@@ -165,7 +202,7 @@ class Clientes extends Component {
             return(
                 <React.Fragment>
                     {this.state.error && (
-                        <AlertError message={"Se ha producido un error! CODE:" + this.state.mensajeError} />
+                        <AlertError message={this.state.mensajeError} />
                     )}
                     <div className="container m-2 p-3">
                         <div className="text-center">
@@ -272,26 +309,25 @@ class Clientes extends Component {
                     </TableContainer>
                     {!this.state.nulo && (
                         <Dialog open={this.state.estadoModalPedido} onClose={() => this.cerrarAgregarPedido()} aria-describedby="Agregar Pedido">
-                            <DialogTitle className="text-center text-uppercase">Agregar un Pedido</DialogTitle>
+                            <DialogTitle className="text-center">Agregar un Pedido</DialogTitle>
                                 <DialogContent>
-                                    <Box className="p-1 m-2">
-                                        <DialogContentText>
-                                            <div className="mb-1 p-1">
-                                                <p className="primary"><strong>Datos del Cliente</strong></p>
-                                            </div>
-                                        </DialogContentText>
-                                        <DialogContentText id="" color="black">
-                                            <div className="mb-1 p-1">
-                                                <p className="primary"><strong>Nombres:</strong> {this.state.clienteSeleccionado.firstName} {this.state.clienteSeleccionado.secondName}</p>
-                                                <p className="primary"><strong>Apellidos:</strong> {this.state.clienteSeleccionado.firstLastName} {this.state.clienteSeleccionado.secondLastName}</p>
-                                                <p className="primary"><strong>Género:</strong> {this.state.clienteSeleccionado.gender}</p>
-                                            </div>
-                                        </DialogContentText>
-                                        <DialogContentText>
-                                            <div className="mb-1 p-1">
-                                                <p className="primary"><strong>Opciones del Pedido</strong></p>
-                                            </div>
-                                        </DialogContentText>
+                                    <Box className="p-1 m-1">
+                                        <div className="mb-1 p-1">
+                                            <DialogContentText className="text-center">
+                                                <strong>Datos del Cliente</strong>
+                                            </DialogContentText>
+                                        </div>
+                                        <div className="mb-1 p-1">
+                                        <DialogContentText className="p-1"><strong>ID:</strong> {this.state.clienteSeleccionado.id}</DialogContentText>
+                                            <DialogContentText className="p-1"><strong>Nombres:</strong> {this.state.clienteSeleccionado.firstName} {this.state.clienteSeleccionado.secondName}</DialogContentText>
+                                            <DialogContentText className="p-1"><strong>Apellidos:</strong> {this.state.clienteSeleccionado.firstLastName} {this.state.clienteSeleccionado.secondLastName}</DialogContentText>
+                                            <DialogContentText className="p-1"><strong>Género:</strong> {this.state.clienteSeleccionado.gender}</DialogContentText>
+                                        </div>
+                                        <div className="mb-1 p-1 text-center">
+                                            <DialogContentText className="p-1">
+                                                <strong>Opciones del Pedido</strong>
+                                            </DialogContentText>
+                                        </div>
                                         <FormControl fullWidth>
                                             <InputLabel id="type">Tipo de Prenda</InputLabel>
                                             <div className="mb-1 p-1">
@@ -300,10 +336,10 @@ class Clientes extends Component {
                                                         className="w-100"
                                                         labelId="type"
                                                         label="Tipo de Prenda"
-                                                        value={this.state.pedido === "" ? "Vestido" : this.state.pedido}
+                                                        value={this.state.pedido}
                                                         onChange={(newValue) => {this.tipoAgregarPedido(newValue.target.value)}}
                                                     >
-                                                        <MenuItem selected value={"Vestido"}>Vestido</MenuItem>
+                                                        <MenuItem value={"Vestido"}>Vestido</MenuItem>
                                                         <MenuItem value={"Blusa"}>Blusa</MenuItem>
                                                         <MenuItem value={"Camisa"}>Camisa</MenuItem>
                                                         <MenuItem value={"Chaqueta: Cuero"}>Chaqueta: Cuero</MenuItem>
@@ -313,10 +349,10 @@ class Clientes extends Component {
                                                         className="w-100"
                                                         labelId="type"
                                                         label="Tipo de Prenda"
-                                                        value={this.state.pedido === "" ? "Camisa" : this.state.pedido}
+                                                        value={this.state.pedido}
                                                         onChange={(newValue) => this.tipoAgregarPedido(newValue.target.value)}
                                                     >
-                                                        <MenuItem selected value={"Traje: Dos piezas"}>Traje: Dos piezas</MenuItem>
+                                                        <MenuItem value={"Traje: Dos piezas"}>Traje: Dos piezas</MenuItem>
                                                         <MenuItem value={"Traje: Tres piezas"}>Traje: Tres piezas</MenuItem>
                                                         <MenuItem value={"Camisa"}>Camisa</MenuItem>
                                                         <MenuItem value={"Chaqueta: Cuero"}>Chaqueta: Cuero</MenuItem>
@@ -324,15 +360,14 @@ class Clientes extends Component {
                                                 }
                                             </div>
                                             <div className="mb-1 p-1">
-                                                <InputLabel id="type">Tipo de Prenda</InputLabel>
+                                                <InputLabel id="fecha_entrega">Tipo de Prenda</InputLabel>
                                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                                                     <DesktopDatePicker
                                                         disablePast={true}
                                                         labelId="fecha_entrega"
                                                         label="Fecha de Entrega"
-                                                        openTo="year"
+                                                        openTo="month"
                                                         views={['month', 'day']}
-                                                        inputFormat="DD/MM/YYYY"
                                                         value={this.state.fecha}
                                                         onChange={(newValue) => {
                                                             this.fechaAgregarPedido(newValue);
