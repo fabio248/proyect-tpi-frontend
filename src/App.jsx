@@ -7,6 +7,7 @@ import RequireAuth from './pages/Auth/RequireAuth';
 import Logout from './pages/Auth/Logout';
 import Pedido from './pages/Auth/Pedido';
 import Profile from './pages/Profile';
+import Actualizar from './pages/Auth/Actualizar'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path='/register' element={<Register />}></Route>
         <Route path='/logout' element={<Logout />}></Route>
         <Route path='/pedido' element={<Pedido />}></Route>
+        <Route path='/actualizar' element={<Actualizar/>}></Route>
         <Route
           element={
             <RequireAuth

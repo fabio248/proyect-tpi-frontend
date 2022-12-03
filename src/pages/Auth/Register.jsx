@@ -60,7 +60,7 @@ function Register() {
         medidasParteInferiorMujer,
       };
     }
-    // console.log(postData);
+    console.log(postData);
 
     //Envio a back
     axios
@@ -71,7 +71,6 @@ function Register() {
       .catch((err) => {
         console.error("AXIOS ERROR: ", err);
       });
-    console.log(enviado);
   };
 
   //Si se envia correctamente, resetea los campos
