@@ -85,7 +85,10 @@ function Register() {
   const medidas = watch("gender");
 
   return (
-    <div className="card p-5" style={{ width: "70%", margin: "5rem auto" }}>
+    <div
+      className="card p-5 shadow-lg p-3 mb-5 bg-white rounded"
+      style={{ width: "70%", margin: "5rem auto" }}
+    >
       <h1 className="mb-5 text-center">Registro de cliente</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form-group row mb-4">
@@ -212,11 +215,12 @@ function Register() {
                 <h3>Parte superior</h3>
 
                 <div className="row my-3">
-                  <div className="col-3">
+                  <div className="col-5">
                     <label>Hombro:</label>
                   </div>
                   <div className="col">
                     <input
+                      style={{ width: "50%" }}
                       type="text"
                       {...register("medidaParteSuperiorHombre.hombro", {
                         required: true,
@@ -227,250 +231,372 @@ function Register() {
                     />
                   </div>
                 </div>
-                
-                <div>
-                  <label>Largo camisa:</label>
-                  <input
-                    type="text"
-                    {...register("medidaParteSuperiorHombre.largoCamisa", {
-                      required: true,
-                      pattern: {
-                        value: /^[0-9]+(.[0-9]+)?$/,
-                      },
-                    })}
-                  />
+
+                <div className="row mb-3">
+                  <div className="col-5">
+                    <label>Largo camisa:</label>
+                  </div>
+
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register("medidaParteSuperiorHombre.largoCamisa", {
+                        required: true,
+                        pattern: {
+                          value: /^[0-9]+(.[0-9]+)?$/,
+                        },
+                      })}
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label>Ancho cuello:</label>
-                  <input
-                    type="text"
-                    {...register("medidaParteSuperiorHombre.anchoCuello", {
-                      required: true,
-                      pattern: {
-                        value: /^[0-9]+(.[0-9]+)?$/,
-                      },
-                    })}
-                  />
+
+                <div className="row mb-3">
+                  <div className="col-5">
+                    <label>Ancho cuello:</label>
+                  </div>
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register("medidaParteSuperiorHombre.anchoCuello", {
+                        required: true,
+                        pattern: {
+                          value: /^[0-9]+(.[0-9]+)?$/,
+                        },
+                      })}
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label>Talle frente:</label>
-                  <input
-                    type="text"
-                    {...register("medidaParteSuperiorHombre.talleFrente", {
-                      required: true,
-                      pattern: {
-                        value: /^[0-9]+(.[0-9]+)?$/,
-                      },
-                    })}
-                  />
+
+                <div className="row mb-3">
+                  <div className="col-5">
+                    <label>Talle frente:</label>
+                  </div>
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register("medidaParteSuperiorHombre.talleFrente", {
+                        required: true,
+                        pattern: {
+                          value: /^[0-9]+(.[0-9]+)?$/,
+                        },
+                      })}
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label>Frente pecho:</label>
-                  <input
-                    type="text"
-                    {...register("medidaParteSuperiorHombre.frentePecho", {
-                      required: true,
-                      pattern: {
-                        value: /^[0-9]+(.[0-9]+)?$/,
-                      },
-                    })}
-                  />
+
+                <div className="row mb-3">
+                  <div className="col-5">
+                    <label>Frente pecho:</label>
+                  </div>
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register("medidaParteSuperiorHombre.frentePecho", {
+                        required: true,
+                        pattern: {
+                          value: /^[0-9]+(.[0-9]+)?$/,
+                        },
+                      })}
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label>Talle espalda:</label>
-                  <input
-                    type="text"
-                    {...register("medidaParteSuperiorHombre.talleEspalda", {
-                      required: true,
-                      pattern: {
-                        value: /^[0-9]+(.[0-9]+)?$/,
-                      },
-                    })}
-                  />
+
+                <div className="row mb-3">
+                  <div className="col-5">
+                    <label>Talle espalda:</label>
+                  </div>
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register("medidaParteSuperiorHombre.talleEspalda", {
+                        required: true,
+                        pattern: {
+                          value: /^[0-9]+(.[0-9]+)?$/,
+                        },
+                      })}
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label>Boca manga:</label>
-                  <input
-                    type="text"
-                    {...register("medidaParteSuperiorHombre.bocaManga", {
-                      required: true,
-                      pattern: {
-                        value: /^[0-9]+(.[0-9]+)?$/,
-                      },
-                    })}
-                  />
+
+                <div className="row mb-3">
+                  <div className="col-5">
+                    <label>Boca manga:</label>
+                  </div>
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register("medidaParteSuperiorHombre.bocaManga", {
+                        required: true,
+                        pattern: {
+                          value: /^[0-9]+(.[0-9]+)?$/,
+                        },
+                      })}
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label>Sisa camisa:</label>
-                  <input
-                    type="text"
-                    {...register("medidaParteSuperiorHombre.sisaCamisa", {
-                      required: true,
-                      pattern: {
-                        value: /^[0-9]+(.[0-9]+)?$/,
-                      },
-                    })}
-                  />
+
+                <div className="row mb-3">
+                  <div className="col-5">
+                    <label>Sisa camisa:</label>
+                  </div>
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register("medidaParteSuperiorHombre.sisaCamisa", {
+                        required: true,
+                        pattern: {
+                          value: /^[0-9]+(.[0-9]+)?$/,
+                        },
+                      })}
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label>Primer boton:</label>
-                  <input
-                    type="text"
-                    {...register("medidaParteSuperiorHombre.primerBoton", {
-                      required: true,
-                      pattern: {
-                        value: /^[0-9]+(.[0-9]+)?$/,
-                      },
-                    })}
-                  />
+
+                <div className="row mb-3">
+                  <div className="col-5">
+                    <label>Primer boton:</label>
+                  </div>
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register("medidaParteSuperiorHombre.primerBoton", {
+                        required: true,
+                        pattern: {
+                          value: /^[0-9]+(.[0-9]+)?$/,
+                        },
+                      })}
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label>Largo manga:</label>
-                  <input
-                    type="text"
-                    {...register("medidaParteSuperiorHombre.largoManga", {
-                      required: true,
-                      pattern: {
-                        value: /^[0-9]+(.[0-9]+)?$/,
-                      },
-                    })}
-                  />
+
+                <div className="row mb-3">
+                  <div className="col-5">
+                    <label>Largo manga:</label>
+                  </div>
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register("medidaParteSuperiorHombre.largoManga", {
+                        required: true,
+                        pattern: {
+                          value: /^[0-9]+(.[0-9]+)?$/,
+                        },
+                      })}
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label>Hombro a codo:</label>
-                  <input
-                    type="text"
-                    {...register("medidaParteSuperiorHombre.hombroACodo", {
-                      required: true,
-                      pattern: {
-                        value: /^[0-9]+(.[0-9]+)?$/,
-                      },
-                    })}
-                  />
+
+                <div className="row mb-3">
+                  <div className="col-5">
+                    <label>Hombro a codo:</label>
+                  </div>
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register("medidaParteSuperiorHombre.hombroACodo", {
+                        required: true,
+                        pattern: {
+                          value: /^[0-9]+(.[0-9]+)?$/,
+                        },
+                      })}
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label>Ancho brazo:</label>
-                  <input
-                    type="text"
-                    {...register("medidaParteSuperiorHombre.anchoBrazo", {
-                      required: true,
-                      pattern: {
-                        value: /^[0-9]+(.[0-9]+)?$/,
-                      },
-                    })}
-                  />
+
+                <div className="row mb-3">
+                  <div className="col-5">
+                    <label>Ancho brazo:</label>
+                  </div>
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register("medidaParteSuperiorHombre.anchoBrazo", {
+                        required: true,
+                        pattern: {
+                          value: /^[0-9]+(.[0-9]+)?$/,
+                        },
+                      })}
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label>Cintura:</label>
-                  <input
-                    type="text"
-                    {...register("medidaParteSuperiorHombre.cintura", {
-                      required: true,
-                      pattern: {
-                        value: /^[0-9]+(.[0-9]+)?$/,
-                      },
-                    })}
-                  />
+
+                <div className="row mb-3">
+                  <div className="col-5">
+                    <label>Cintura:</label>
+                  </div>
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register("medidaParteSuperiorHombre.cintura", {
+                        required: true,
+                        pattern: {
+                          value: /^[0-9]+(.[0-9]+)?$/,
+                        },
+                      })}
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label>Cadera:</label>
-                  <input
-                    type="text"
-                    {...register("medidaParteSuperiorHombre.cadera", {
-                      required: true,
-                      pattern: {
-                        value: /^[0-9]+(.[0-9]+)?$/,
-                      },
-                    })}
-                  />
+
+                <div className="row mb-3">
+                  <div className="col-5">
+                    <label>Cadera:</label>
+                  </div>
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register("medidaParteSuperiorHombre.cadera", {
+                        required: true,
+                        pattern: {
+                          value: /^[0-9]+(.[0-9]+)?$/,
+                        },
+                      })}
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label>Espalda:</label>
-                  <input
-                    type="text"
-                    {...register("medidaParteSuperiorHombre.espalda", {
-                      required: true,
-                      pattern: {
-                        value: /^[0-9]+(.[0-9]+)?$/,
-                      },
-                    })}
-                  />
+
+                <div className="row mb-3">
+                  <div className="col-5">
+                    <label>Espalda:</label>
+                  </div>
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register("medidaParteSuperiorHombre.espalda", {
+                        required: true,
+                        pattern: {
+                          value: /^[0-9]+(.[0-9]+)?$/,
+                        },
+                      })}
+                    />
+                  </div>
                 </div>
               </div>
 
               <div>
                 <h3>Parte inferior</h3>
-                <div>
-                  <label>Largo pantalon:</label>
-                  <input
-                    type="text"
-                    {...register("medidaParteInferiorHombre.largoPantalon", {
-                      required: true,
-                      pattern: {
-                        value: /^[0-9]+(.[0-9]+)?$/,
-                      },
-                    })}
-                  />
+                <div className="row my-3">
+                  <div className="col-5">
+                    <label>Largo pantalon:</label>
+                  </div>
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register("medidaParteInferiorHombre.largoPantalon", {
+                        required: true,
+                        pattern: {
+                          value: /^[0-9]+(.[0-9]+)?$/,
+                        },
+                      })}
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label>Ancho rodilla:</label>
-                  <input
-                    type="text"
-                    {...register("medidaParteInferiorHombre.anchoRodilla", {
-                      required: true,
-                      pattern: {
-                        value: /^[0-9]+(.[0-9]+)?$/,
-                      },
-                    })}
-                  />
+
+                <div className="row mb-3">
+                  <div className="col-5">
+                    <label>Ancho rodilla:</label>
+                  </div>
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register("medidaParteInferiorHombre.anchoRodilla", {
+                        required: true,
+                        pattern: {
+                          value: /^[0-9]+(.[0-9]+)?$/,
+                        },
+                      })}
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label>Ancho tobillo:</label>
-                  <input
-                    type="text"
-                    {...register("medidaParteInferiorHombre.anchoTobillo", {
-                      required: true,
-                      pattern: {
-                        value: /^[0-9]+(.[0-9]+)?$/,
-                      },
-                    })}
-                  />
+
+                <div className="row mb-3">
+                  <div className="col-5">
+                    <label>Ancho tobillo:</label>
+                  </div>
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register("medidaParteInferiorHombre.anchoTobillo", {
+                        required: true,
+                        pattern: {
+                          value: /^[0-9]+(.[0-9]+)?$/,
+                        },
+                      })}
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label>Cintura a rodilla:</label>
-                  <input
-                    type="text"
-                    {...register("medidaParteInferiorHombre.cinturaARodilla", {
-                      required: true,
-                      pattern: {
-                        value: /^[0-9]+(.[0-9]+)?$/,
-                      },
-                    })}
-                  />
+
+                <div className="row mb-3">
+                  <div className="col-5">
+                    <label>Cintura a rodilla:</label>
+                  </div>
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register(
+                        "medidaParteInferiorHombre.cinturaARodilla",
+                        {
+                          required: true,
+                          pattern: {
+                            value: /^[0-9]+(.[0-9]+)?$/,
+                          },
+                        }
+                      )}
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label>Tiro:</label>
-                  <input
-                    type="text"
-                    {...register("medidaParteInferiorHombre.tiro", {
-                      required: true,
-                      pattern: {
-                        value: /^[0-9]+(.[0-9]+)?$/,
-                      },
-                    })}
-                  />
+
+                <div className="row mb-3">
+                  <div className="col-5">
+                    <label>Tiro:</label>
+                  </div>
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register("medidaParteInferiorHombre.tiro", {
+                        required: true,
+                        pattern: {
+                          value: /^[0-9]+(.[0-9]+)?$/,
+                        },
+                      })}
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label>Cadera:</label>
-                  <input
-                    type="text"
-                    {...register("medidaParteInferiorHombre.cadera", {
-                      required: true,
-                      pattern: {
-                        value: /^[0-9]+(.[0-9]+)?$/,
-                      },
-                    })}
-                  />
+
+                <div className="row mb-3">
+                  <div className="col-5">
+                    <label>Cadera:</label>
+                  </div>
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register("medidaParteInferiorHombre.cadera", {
+                        required: true,
+                        pattern: {
+                          value: /^[0-9]+(.[0-9]+)?$/,
+                        },
+                      })}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -478,231 +604,331 @@ function Register() {
         )}
         {medidas == "Femenino" && (
           <div>
-            <h1>Medidas femeninas</h1>
-            <h2>Parte superior</h2>
-            <div>
-              <label>Largo blusa:</label>
-              <input
-                type="text"
-                {...register("medidasParteSuperiorMujer.largoBlusa", {
-                  required: true,
-                  pattern: {
-                    value: /^[0-9]+(.[0-9]+)?$/,
-                  },
-                })}
-              />
-            </div>
-            <div>
-              <label>Escote:</label>
-              <input
-                type="text"
-                {...register("medidasParteSuperiorMujer.escote", {
-                  required: true,
-                  pattern: {
-                    value: /^[0-9]+(.[0-9]+)?$/,
-                  },
-                })}
-              />
-            </div>
-            <div>
-              <label>Hombro:</label>
-              <input
-                type="text"
-                {...register("medidasParteSuperiorMujer.hombro", {
-                  required: true,
-                  pattern: {
-                    value: /^[0-9]+(.[0-9]+)?$/,
-                  },
-                })}
-              />
-            </div>
-            <div>
-              <label>Talle:</label>
-              <input
-                type="text"
-                {...register("medidasParteSuperiorMujer.talle", {
-                  required: true,
-                  pattern: {
-                    value: /^[0-9]+(.[0-9]+)?$/,
-                  },
-                })}
-              />
-            </div>
-            <div>
-              <label>Busto:</label>
-              <input
-                type="text"
-                {...register("medidasParteSuperiorMujer.busto", {
-                  required: true,
-                  pattern: {
-                    value: /^[0-9]+(.[0-9]+)?$/,
-                  },
-                })}
-              />
-            </div>
-            <div>
-              <label>Sisa:</label>
-              <input
-                type="text"
-                {...register("medidasParteSuperiorMujer.sisa", {
-                  required: true,
-                  pattern: {
-                    value: /^[0-9]+(.[0-9]+)?$/,
-                  },
-                })}
-              />
-            </div>
-            <div>
-              <label>Manga:</label>
-              <input
-                type="text"
-                {...register("medidasParteSuperiorMujer.manga", {
-                  required: true,
-                  pattern: {
-                    value: /^[0-9]+(.[0-9]+)?$/,
-                  },
-                })}
-              />
-            </div>
-            <div>
-              <label>Costado:</label>
-              <input
-                type="text"
-                {...register("medidasParteSuperiorMujer.costado", {
-                  required: true,
-                  pattern: {
-                    value: /^[0-9]+(.[0-9]+)?$/,
-                  },
-                })}
-              />
-            </div>
-            <div>
-              <label>Espalda:</label>
-              <input
-                type="text"
-                {...register("medidasParteSuperiorMujer.espalda", {
-                  required: true,
-                  pattern: {
-                    value: /^[0-9]+(.[0-9]+)?$/,
-                  },
-                })}
-              />
-            </div>
-            <div>
-              <label>Primer boton:</label>
-              <input
-                type="text"
-                {...register("medidasParteSuperiorMujer.primerBoton", {
-                  required: true,
-                  pattern: {
-                    value: /^[0-9]+(.[0-9]+)?$/,
-                  },
-                })}
-              />
-            </div>
-            <div>
-              <label>Cintura:</label>
-              <input
-                type="text"
-                {...register("medidasParteSuperiorMujer.cintura", {
-                  required: true,
-                  pattern: {
-                    value: /^[0-9]+(.[0-9]+)?$/,
-                  },
-                })}
-              />
-            </div>
-            <div>
-              <label>Cadera:</label>
-              <input
-                type="text"
-                {...register("medidasParteSuperiorMujer.cadera", {
-                  required: true,
-                  pattern: {
-                    value: /^[0-9]+(.[0-9]+)?$/,
-                  },
-                })}
-              />
-            </div>
-            <h2>Parte inferior</h2>
-            <div>
-              <label>Largo pantalon:</label>
-              <input
-                type="text"
-                {...register("medidasParteInferiorMujer.largoPantalon", {
-                  required: true,
-                  pattern: {
-                    value: /^[0-9]+(.[0-9]+)?$/,
-                  },
-                })}
-              />
-            </div>
-            <div>
-              <label>Ancho rodilla:</label>
-              <input
-                type="text"
-                {...register("medidasParteInferiorMujer.anchoRodilla", {
-                  required: true,
-                  pattern: {
-                    value: /^[0-9]+(.[0-9]+)?$/,
-                  },
-                })}
-              />
-            </div>
-            <div>
-              <label>Ancho tobillo:</label>
-              <input
-                type="text"
-                {...register("medidasParteInferiorMujer.anchoTobillo", {
-                  required: true,
-                  pattern: {
-                    value: /^[0-9]+(.[0-9]+)?$/,
-                  },
-                })}
-              />
-            </div>
-            <div>
-              <label>Cintura a rodilla:</label>
-              <input
-                type="text"
-                {...register("medidasParteInferiorMujer.cinturaARodilla", {
-                  required: true,
-                  pattern: {
-                    value: /^[0-9]+(.[0-9]+)?$/,
-                  },
-                })}
-              />
-            </div>
-            <div>
-              <label>Tiro:</label>
-              <input
-                type="text"
-                {...register("medidasParteInferiorMujer.tiro", {
-                  required: true,
-                  pattern: {
-                    value: /^[0-9]+(.[0-9]+)?$/,
-                  },
-                })}
-              />
-            </div>
-            <div>
-              <label>Cadera:</label>
-              <input
-                type="text"
-                {...register("medidasParteInferiorMujer.cadera", {
-                  required: true,
-                  pattern: {
-                    value: /^[0-9]+(.[0-9]+)?$/,
-                  },
-                })}
-              />
+            <h2 className="my-4 text-center">Medidas femeninas</h2>
+            <div className="d-flex flex-col" style={{ gap: "20%" }}>
+              <div>
+                <h2>Parte superior</h2>
+                <div className="row my-3">
+                  <div className="col-5">
+                    <label>Largo blusa:</label>
+                  </div>
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register("medidasParteSuperiorMujer.largoBlusa", {
+                        required: true,
+                        pattern: {
+                          value: /^[0-9]+(.[0-9]+)?$/,
+                        },
+                      })}
+                    />
+                  </div>
+                </div>
+                <div className="row mb-3">
+                  <div className="col-5">
+                    <label>Escote:</label>
+                  </div>
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register("medidasParteSuperiorMujer.escote", {
+                        required: true,
+                        pattern: {
+                          value: /^[0-9]+(.[0-9]+)?$/,
+                        },
+                      })}
+                    />
+                  </div>
+                </div>
+                <div className="row mb-3">
+                  <div className="col-5">
+                    <label>Hombro:</label>
+                  </div>
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register("medidasParteSuperiorMujer.hombro", {
+                        required: true,
+                        pattern: {
+                          value: /^[0-9]+(.[0-9]+)?$/,
+                        },
+                      })}
+                    />
+                  </div>
+                </div>
+                <div className="row mb-3">
+                  <div className="col-5">
+                    <label>Talle:</label>
+                  </div>
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register("medidasParteSuperiorMujer.talle", {
+                        required: true,
+                        pattern: {
+                          value: /^[0-9]+(.[0-9]+)?$/,
+                        },
+                      })}
+                    />
+                  </div>
+                </div>
+                <div className="row mb-3">
+                  <div className="col-5">
+                    <label>Busto:</label>
+                  </div>
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register("medidasParteSuperiorMujer.busto", {
+                        required: true,
+                        pattern: {
+                          value: /^[0-9]+(.[0-9]+)?$/,
+                        },
+                      })}
+                    />
+                  </div>
+                </div>
+                <div className="row mb-3">
+                  <div className="col-5">
+                    <label>Sisa:</label>
+                  </div>
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register("medidasParteSuperiorMujer.sisa", {
+                        required: true,
+                        pattern: {
+                          value: /^[0-9]+(.[0-9]+)?$/,
+                        },
+                      })}
+                    />
+                  </div>
+                </div>
+                <div className="row mb-3">
+                  <div className="col-5">
+                    <label>Manga:</label>
+                  </div>
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register("medidasParteSuperiorMujer.manga", {
+                        required: true,
+                        pattern: {
+                          value: /^[0-9]+(.[0-9]+)?$/,
+                        },
+                      })}
+                    />
+                  </div>
+                </div>
+                <div className="row mb-3">
+                  <div className="col-5">
+                    <label>Costado:</label>
+                  </div>
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register("medidasParteSuperiorMujer.costado", {
+                        required: true,
+                        pattern: {
+                          value: /^[0-9]+(.[0-9]+)?$/,
+                        },
+                      })}
+                    />
+                  </div>
+                </div>
+                <div className="row mb-3">
+                  <div className="col-5">
+                    <label>Espalda:</label>
+                  </div>
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register("medidasParteSuperiorMujer.espalda", {
+                        required: true,
+                        pattern: {
+                          value: /^[0-9]+(.[0-9]+)?$/,
+                        },
+                      })}
+                    />
+                  </div>
+                </div>
+                <div className="row mb-3">
+                  <div className="col-5">
+                    <label>Primer boton:</label>
+                  </div>
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register("medidasParteSuperiorMujer.primerBoton", {
+                        required: true,
+                        pattern: {
+                          value: /^[0-9]+(.[0-9]+)?$/,
+                        },
+                      })}
+                    />
+                  </div>
+                </div>
+                <div className="row mb-3">
+                  <div className="col-5">
+                    <label>Cintura:</label>
+                  </div>
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register("medidasParteSuperiorMujer.cintura", {
+                        required: true,
+                        pattern: {
+                          value: /^[0-9]+(.[0-9]+)?$/,
+                        },
+                      })}
+                    />
+                  </div>
+                </div>
+                <div className="row mb-3">
+                  <div className="col-5">
+                    <label>Cadera:</label>
+                  </div>
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register("medidasParteSuperiorMujer.cadera", {
+                        required: true,
+                        pattern: {
+                          value: /^[0-9]+(.[0-9]+)?$/,
+                        },
+                      })}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h2>Parte inferior</h2>
+                <div className="row mb-3">
+                  <div className="col-5">
+                    <label>Largo pantalon:</label>
+                  </div>
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register("medidasParteInferiorMujer.largoPantalon", {
+                        required: true,
+                        pattern: {
+                          value: /^[0-9]+(.[0-9]+)?$/,
+                        },
+                      })}
+                    />
+                  </div>
+                </div>
+                <div className="row mb-3">
+                  <div className="col-5">
+                    <label>Ancho rodilla:</label>
+                  </div>
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register("medidasParteInferiorMujer.anchoRodilla", {
+                        required: true,
+                        pattern: {
+                          value: /^[0-9]+(.[0-9]+)?$/,
+                        },
+                      })}
+                    />
+                  </div>
+                </div>
+                <div className="row mb-3">
+                  <div className="col-5">
+                    <label>Ancho tobillo:</label>
+                  </div>
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register("medidasParteInferiorMujer.anchoTobillo", {
+                        required: true,
+                        pattern: {
+                          value: /^[0-9]+(.[0-9]+)?$/,
+                        },
+                      })}
+                    />
+                  </div>
+                </div>
+                <div className="row mb-3">
+                  <div className="col-5">
+                    <label>Cintura a rodilla:</label>
+                  </div>
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register(
+                        "medidasParteInferiorMujer.cinturaARodilla",
+                        {
+                          required: true,
+                          pattern: {
+                            value: /^[0-9]+(.[0-9]+)?$/,
+                          },
+                        }
+                      )}
+                    />
+                  </div>
+                </div>
+                <div className="row mb-3">
+                  <div className="col-5">
+                    <label>Tiro:</label>
+                  </div>
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register("medidasParteInferiorMujer.tiro", {
+                        required: true,
+                        pattern: {
+                          value: /^[0-9]+(.[0-9]+)?$/,
+                        },
+                      })}
+                    />
+                  </div>
+                </div>
+                <div className="row mb-3">
+                  <div className="col-5">
+                    <label>Cadera:</label>
+                  </div>
+                  <div className="col">
+                    <input
+                      style={{ width: "50%" }}
+                      type="text"
+                      {...register("medidasParteInferiorMujer.cadera", {
+                        required: true,
+                        pattern: {
+                          value: /^[0-9]+(.[0-9]+)?$/,
+                        },
+                      })}
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         )}
         <input
           type="submit"
           value="Registrar"
-          className="btn btn-primary  btn-lg btn-block"
+          className="btn btn-primary btn-lg"
+          style={{ float: "right", marginRight: "20%" }}
         />
       </form>
     </div>
