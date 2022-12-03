@@ -227,6 +227,7 @@ function Register() {
                     />
                   </div>
                 </div>
+                
                 <div>
                   <label>Largo camisa:</label>
                   <input
