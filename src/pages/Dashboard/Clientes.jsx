@@ -95,18 +95,19 @@ class Clientes extends Component {
     * ------------------------------------------------------------ */
     async agregarPedido() {
 
-        const cuerpo = {
-            clienteId:  this.state.clienteSeleccionado.id,
-            fechaEntrega: new Date(this.state.fecha).toISOString(),
-            type: this.state.pedido
-        }
-
         if(!(this.state.pedido === "") && dayjs(this.state.fecha).isValid()) {
+            
+            const cuerpo = {
+                clienteId:  this.state.clienteSeleccionado.id,
+                fechaEntrega: new Date(this.state.fecha).toISOString(),
+                type: this.state.pedido
+            }
+
             fetch("https://proyecto-tpi-backend-production.up.railway.app/api/v1/tasks", {
                 method: "POST",
                 headers:{
                     "Content-Type": "application/json",
-                    "api":"78b96cea5c47cf11ae257dd16dd09e809f5bb205c29db1fdde1a33bede7e873b",
+                    "api":"8b96cea5c47cf11ae257dd16dd09e809f5bb205c29db1fdde1a33bede7e873b",
                     "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMmJlN2MwZS01Mjc1LTQyNjEtYmZiMC1jMDcxYWE4NGI1NTIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2NjkzNDAzNDd9.yh76A2ekWXODxuAIdsRmdtB9KOr4kdFGtULH9QWlQR8"
                 },
                 body: JSON.stringify(cuerpo)
@@ -118,11 +119,13 @@ class Clientes extends Component {
                     const error = (data && data.message) || response.statusText;
                     return Promise.reject(error);
                 }
+                this.cerrarAgregarPedido();
             }).catch(error => {
                 this.setState({ 
                     mensajeError:error.toString(),
                     error:true, 
                 });
+                this.cerrarAgregarPedido();
             });
         }
         else {
@@ -137,6 +140,7 @@ class Clientes extends Component {
         this.setState({
             estadoModalPedido:true,
             clienteSeleccionado:cliente,
+            fecha: dayjs(),
         });
     }
 
