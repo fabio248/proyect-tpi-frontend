@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Grid, Typography, Button, Divider } from '@mui/material';
+import avatar from '../assets/img/avatar/avatar.png';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 function Profile() {
   const [userData, setUserData] = useState({});
   const navigate = useNavigate();
   useEffect(() => {
     setUserData(JSON.parse(localStorage.getItem('user')));
-    console.log(userData);
   }, []);
   return (
     <Container sx={{ mt: 7 }}>
@@ -28,10 +28,7 @@ function Profile() {
           </Divider>
         </Grid>
         <Grid item xs={4} sm={4} md={6} sx={{ textAlign: 'center' }}>
-          <img
-            src='https://gravatar.com/avatar/7fdbd3802d5974fba06566f510149559?s=200&d=mp&r=x'
-            alt='avatar'
-          />
+          <img src={avatar} alt='avatar' height='200px' />
         </Grid>
         <Grid item xs={4} sm={4} md={6}>
           <Typography variant='subtitle1'>

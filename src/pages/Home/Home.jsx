@@ -1,9 +1,9 @@
 import React from 'react';
-
+import '../../css/styles.css';
 function Home() {
   return (
     <React.Fragment>
-      <body id='page-top'>
+      <div id='page-top'>
         <nav
           className='navbar navbar-expand-lg navbar-dark fixed-top'
           id='mainNav'
@@ -146,7 +146,9 @@ function Home() {
                     />
                   </a>
                   <div className='portfolio-caption'>
-                    <div className='portfolio-caption-heading'>Camiseta de Corte Entallado</div>
+                    <div className='portfolio-caption-heading'>
+                      Camiseta de Corte Entallado
+                    </div>
                     <div className='portfolio-caption-subheading text-muted'>
                       Premium
                     </div>
@@ -172,7 +174,9 @@ function Home() {
                     />
                   </a>
                   <div className='portfolio-caption'>
-                    <div className='portfolio-caption-heading'>Chaqueta de Algodón</div>
+                    <div className='portfolio-caption-heading'>
+                      Chaqueta de Algodón
+                    </div>
                     <div className='portfolio-caption-subheading text-muted'>
                       Abrigos
                     </div>
@@ -186,19 +190,21 @@ function Home() {
                     data-bs-toggle='modal'
                     href='#portfolioModal3'
                   >
-                  <div className='portfolio-hover'>
-                    <div className='portfolio-hover-content'>
-                      <i className='fas fa-plus fa-3x'></i>
+                    <div className='portfolio-hover'>
+                      <div className='portfolio-hover-content'>
+                        <i className='fas fa-plus fa-3x'></i>
+                      </div>
                     </div>
-                  </div>
-                  <img
-                    className='img-fluid'
-                    src='/src/assets/img/portfolio/3.jpg'
-                    alt='...'
-                  />
+                    <img
+                      className='img-fluid'
+                      src='/src/assets/img/portfolio/3.jpg'
+                      alt='...'
+                    />
                   </a>
                   <div className='portfolio-caption'>
-                    <div className='portfolio-caption-heading'>Chaqueta Impermeable</div>
+                    <div className='portfolio-caption-heading'>
+                      Chaqueta Impermeable
+                    </div>
                     <div className='portfolio-caption-subheading text-muted'>
                       Impermeables
                     </div>
@@ -224,7 +230,9 @@ function Home() {
                     />
                   </a>
                   <div className='portfolio-caption'>
-                    <div className='portfolio-caption-heading'>Chaqueta Sintética</div>
+                    <div className='portfolio-caption-heading'>
+                      Chaqueta Sintética
+                    </div>
                     <div className='portfolio-caption-subheading text-muted'>
                       Sintéticos
                     </div>
@@ -254,7 +262,7 @@ function Home() {
                       Traje de dos piezas
                     </div>
                     <div className='portfolio-caption-subheading text-muted'>
-                    Formal - Casual
+                      Formal - Casual
                     </div>
                   </div>
                 </div>
@@ -465,19 +473,23 @@ function Home() {
                 <div className='row justify-content-center'>
                   <div className='col-lg-8'>
                     <div className='modal-body'>
-                      <h2 className='text-uppercase'>Camiseta: Corte Entallado</h2>
-                      <p className='item-intro text-muted'>
-                        Premium
-                      </p>
+                      <h2 className='text-uppercase'>
+                        Camiseta: Corte Entallado
+                      </h2>
+                      <p className='item-intro text-muted'>Premium</p>
                       <img
                         className='img-fluid d-block mx-auto'
                         src='/src/assets/img/portfolio/1.jpg'
                         alt='...'
                       />
                       <p>
-                      Estilo ajustado, manga larga raglán en contraste, tapeta henley de tres botones, tela ligera y suave para un uso cómodo y transpirable.
-                      Y camisas con costuras sólidas con cuello redondo hechas para una mayor durabilidad y un gran ajuste para la moda casual y los fanáticos
-                      del béisbol acérrimos. El escote redondo estilo henley incluye una tapeta de tres botones.
+                        Estilo ajustado, manga larga raglán en contraste, tapeta
+                        henley de tres botones, tela ligera y suave para un uso
+                        cómodo y transpirable. Y camisas con costuras sólidas
+                        con cuello redondo hechas para una mayor durabilidad y
+                        un gran ajuste para la moda casual y los fanáticos del
+                        béisbol acérrimos. El escote redondo estilo henley
+                        incluye una tapeta de tres botones.
                       </p>
                       <ul className='list-inline'>
                         <li>
@@ -528,10 +540,14 @@ function Home() {
                         alt='...'
                       />
                       <p>
-                      Excelentes chaquetas de abrigo para primavera / otoño / invierno, adecuadas para muchas ocasiones,
-                      como trabajar, ir de excursión, acampar, escalar montañas / rocas, andar en bicicleta, viajar u otras 
-                      actividades al aire libre. Buena opción de regalo para usted o un miembro de su familia. Un afectuoso amor al padre, 
-                      esposo o hijo en este día de acción de gracias o Navidad.
+                        Excelentes chaquetas de abrigo para primavera / otoño /
+                        invierno, adecuadas para muchas ocasiones, como
+                        trabajar, ir de excursión, acampar, escalar montañas /
+                        rocas, andar en bicicleta, viajar u otras actividades al
+                        aire libre. Buena opción de regalo para usted o un
+                        miembro de su familia. Un afectuoso amor al padre,
+                        esposo o hijo en este día de acción de gracias o
+                        Navidad.
                       </p>
                       <ul className='list-inline'>
                         <li>
@@ -582,10 +598,14 @@ function Home() {
                         alt='...'
                       />
                       <p>
-                      Perfeto, ligero para viajes o ropa casual. Manga larga con capucha, diseño de cintura con cordón ajustable. 
-                      Chubasquero con cierre frontal con botones y cremallera, totalmente forrado a rayas y el chubasquero tiene 2 bolsillos 
-                      laterales son de buen tamaño para guardar todo tipo de cosas, cubre las caderas y la capucha es generosa pero no exagera. 
-                      Los cordones ajustables le dan un aspecto de estilo real.
+                        Perfeto, ligero para viajes o ropa casual. Manga larga
+                        con capucha, diseño de cintura con cordón ajustable.
+                        Chubasquero con cierre frontal con botones y cremallera,
+                        totalmente forrado a rayas y el chubasquero tiene 2
+                        bolsillos laterales son de buen tamaño para guardar todo
+                        tipo de cosas, cubre las caderas y la capucha es
+                        generosa pero no exagera. Los cordones ajustables le dan
+                        un aspecto de estilo real.
                       </p>
                       <ul className='list-inline'>
                         <li>
@@ -628,7 +648,8 @@ function Home() {
                     <div className='modal-body'>
                       <h2 className='text-uppercase'>Lock and Love Chaqueta</h2>
                       <p className='item-intro text-muted'>
-                        Chaqueta motociclista de piel sintética con capucha y desmontable para mujer.
+                        Chaqueta motociclista de piel sintética con capucha y
+                        desmontable para mujer.
                       </p>
                       <img
                         className='img-fluid d-block mx-auto'
@@ -636,10 +657,13 @@ function Home() {
                         alt='...'
                       />
                       <p>
-                      100% POLIURETANO (exterior) 100% POLIÉSTER (forro) 75% POLIÉSTER 25% ALGODÓN (SUÉTER), 
-                      Material de piel sintética para mayor estilo y comodidad / 2 bolsillos en la parte delantera, 
-                      Chaqueta de piel sintética estilo denim con capucha 2-For-One, Detalle de botón en cintura / 
-                      Detalle de costuras a los lados, LAVAR A MANO SOLAMENTE / NO USAR LEJÍA / SECAR LINEAS / NO PLANCHAR
+                        100% POLIURETANO (exterior) 100% POLIÉSTER (forro) 75%
+                        POLIÉSTER 25% ALGODÓN (SUÉTER), Material de piel
+                        sintética para mayor estilo y comodidad / 2 bolsillos en
+                        la parte delantera, Chaqueta de piel sintética estilo
+                        denim con capucha 2-For-One, Detalle de botón en cintura
+                        / Detalle de costuras a los lados, LAVAR A MANO
+                        SOLAMENTE / NO USAR LEJÍA / SECAR LINEAS / NO PLANCHAR
                       </p>
                       <ul className='list-inline'>
                         <li>
@@ -682,7 +706,7 @@ function Home() {
                     <div className='modal-body'>
                       <h2 className='text-uppercase'>Traje de Dos Piezas</h2>
                       <p className='item-intro text-muted'>
-                      Traje Formal de Dos Piezas Corte Clásico.
+                        Traje Formal de Dos Piezas Corte Clásico.
                       </p>
                       <img
                         className='img-fluid d-block mx-auto'
@@ -690,11 +714,14 @@ function Home() {
                         alt='...'
                       />
                       <p>
-                      El traje formal de dos piezas es uno de los conjuntos más versátiles que puedes usar. 
-                      Este traje es perfecto para uso cotidiano, bodas, eventos formales o reuniones de negocios. 
-                      Estos trajes formales de negocios son tan versátiles porque puedes usarlos con camisa de manga larga 
-                      para o con un cuello en V para un atuendo formal, pero tambien con una camisa e incluso un sueter 
-                      para un atuendo mas casual pero elegante.
+                        El traje formal de dos piezas es uno de los conjuntos
+                        más versátiles que puedes usar. Este traje es perfecto
+                        para uso cotidiano, bodas, eventos formales o reuniones
+                        de negocios. Estos trajes formales de negocios son tan
+                        versátiles porque puedes usarlos con camisa de manga
+                        larga para o con un cuello en V para un atuendo formal,
+                        pero tambien con una camisa e incluso un sueter para un
+                        atuendo mas casual pero elegante.
                       </p>
                       <ul className='list-inline'>
                         <li>
@@ -735,11 +762,9 @@ function Home() {
                 <div className='row justify-content-center'>
                   <div className='col-lg-8'>
                     <div className='modal-body'>
-                      <h2 className='text-uppercase'>
-                      Traje de Tres Piezas
-                      </h2>
+                      <h2 className='text-uppercase'>Traje de Tres Piezas</h2>
                       <p className='item-intro text-muted'>
-                      Traje Formal de Tres Piezas Corte Clásico.
+                        Traje Formal de Tres Piezas Corte Clásico.
                       </p>
                       <img
                         className='img-fluid d-block mx-auto'
@@ -813,7 +838,7 @@ function Home() {
             </div>
           </div>
         </footer>
-      </body>
+      </div>
     </React.Fragment>
   );
 }

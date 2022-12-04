@@ -2,9 +2,9 @@ import React, { Component, useState } from 'react';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { Button } from '@mui/material';
 import logo from '/src/assets/img/logo.svg';
-import loading from '/src/assets/img/loading.gif';
 import AlertError from '../../components/AlertError';
 import CircularProgress from '@mui/material/CircularProgress';
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -35,8 +35,6 @@ class Login extends Component {
       seAutentico: valor,
     };
 
-
-
     this.setState(estado);
   }
 
@@ -54,10 +52,10 @@ class Login extends Component {
     };
 
     const body = JSON.stringify(cuerpo);
-    const url = `https://proyecto-tpi.onrender.com/api/v1/auth/login`;
+
     event.preventDefault();
 
-    this.autenticarUsuario(url, body)
+    this.autenticarUsuario('https://proyecto-tpi-backend-production.up.railway.app/api/v1/auth/login', body)
       .then((value) => {
         localStorage.setItem('user', JSON.stringify(value.user));
         localStorage.setItem('token', value.token.toString());
@@ -65,7 +63,7 @@ class Login extends Component {
         //reemplazar por el dashboard ---------------------------------------------------------------
         window.location.href = window.location.href.replace(
           'login',
-          'dashboard-admin'
+          'dashboard-admin/clientes'
         );
       })
       .catch((error) => {
@@ -98,7 +96,7 @@ class Login extends Component {
             }
             sx={{ ml: 15 }}
           >
-            Dashboard
+            Página de inicio
           </Button>
           <div className='row d-flex justify-content-center align-items-center h-100'>
             <div className='col col-xl-10'>
@@ -162,14 +160,20 @@ class Login extends Component {
                             onClick={this.esAutenticado}
                           >
                             {this.state.seAutentico ? (
-                              <CircularProgress color={"inherit"} size={"1rem"}/>
+                              <CircularProgress
+                                color={'inherit'}
+                                size={'1rem'}
+                              />
                             ) : (
                               'Iniciar Sesión.'
                             )}
                           </button>
                         </div>
 
-                        <a href='#!' className='small text-muted'>
+                        <a
+                          href='/olvidar-contraseña'
+                          className='small text-muted'
+                        >
                           ¿Olvidaste tu contraseña?
                         </a>
                         {this.error && (

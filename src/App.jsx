@@ -5,9 +5,19 @@ import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
 import RequireAuth from './pages/Auth/RequireAuth';
 import Logout from './pages/Auth/Logout';
-import Pedido from './pages/Auth/Pedido';
 import Profile from './pages/Profile';
-import Actualizar from './pages/Auth/Actualizar'
+import Clientes from './pages/Dashboard/Clientes';
+import Usuarios from './pages/Dashboard/Users';
+import ChangePassword from './pages/Auth/ChangePassword';
+import ForgotPassword from './pages/Auth/ForgotPassword';
+import Pedidos from './pages/Dashboard/Pedidos';
+
+const validateRole = () => {
+  const user = JSON.parse(localStorage.getItem('user'));
+  if (localStorage.getItem('isLogged') !== 'true' || user.role !== 'ADMIN')
+    return false;
+  return true;
+};
 
 function App() {
   return (
@@ -17,8 +27,8 @@ function App() {
         <Route path='/login' element={<Login />}></Route>
         <Route path='/register' element={<Register />}></Route>
         <Route path='/logout' element={<Logout />}></Route>
-        <Route path='/pedido' element={<Pedido />}></Route>
-        <Route path='/actualizar' element={<Actualizar/>}></Route>
+        <Route path='/cambiar-contraseña' element={<ChangePassword />}></Route>
+        <Route path='/olvidar-contraseña' element={<ForgotPassword />}></Route>
         <Route
           element={
             <RequireAuth
@@ -28,7 +38,36 @@ function App() {
         >
           <Route path='/profile' element={<Profile />}></Route>
           <Route path='/dashboard-admin' element={<Dashboard />}></Route>
+          <Route
+            path='/dashboard-admin/clientes'
+            element={
+              <Dashboard>
+                <Clientes />
+              </Dashboard>
+            }
+          ></Route>
+          <Route
+            path='/dashboard-admin/pedidos'
+            element={
+              <Dashboard>
+                <Pedidos />
+              </Dashboard>
+            }
+          ></Route>
         </Route>
+        <Route
+          path='/dashboard-admin/usuarios'
+          element={
+            <RequireAuth
+              isLogged={validateRole()}
+              redirectTo='/dashboard-admin/clientes'
+            >
+              <Dashboard>
+                <Usuarios />
+              </Dashboard>
+            </RequireAuth>
+          }
+        ></Route>
       </Routes>
     </BrowserRouter>
   );
