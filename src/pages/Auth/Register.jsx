@@ -603,6 +603,7 @@ function Register() {
         )}
         {medidas == "Femenino" && (
           <div>
+            <hr />
             <h2 className="my-4 text-center">Medidas femeninas</h2>
             <div className="d-flex flex-col" style={{ gap: "20%" }}>
               <div>
