@@ -2,9 +2,9 @@ import React, { Component, useState } from 'react';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { Button } from '@mui/material';
 import logo from '/src/assets/img/logo.svg';
-import loading from '/src/assets/img/loading.gif';
 import AlertError from '../../components/AlertError';
 import CircularProgress from '@mui/material/CircularProgress';
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -52,10 +52,10 @@ class Login extends Component {
     };
 
     const body = JSON.stringify(cuerpo);
-    const url = `https://proyecto-tpi-backend-production.up.railway.app/auth/login`;
+
     event.preventDefault();
 
-    this.autenticarUsuario(url, body)
+    this.autenticarUsuario('https://proyecto-tpi-backend-production.up.railway.app/api/v1/auth/login', body)
       .then((value) => {
         localStorage.setItem('user', JSON.stringify(value.user));
         localStorage.setItem('token', value.token.toString());

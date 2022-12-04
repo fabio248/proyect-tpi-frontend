@@ -50,9 +50,9 @@ class Pedidos extends Component{
 
 
     async borrarPedido(){
-    const url = 'https://proyecto-tpi-backend-production.up.railway.app/'
+        const url_api = 'https://proyecto-tpi-backend-production.up.railway.app/api/v1'
 
-        const respuesta = await fetch(url+"/tasks/"+this.state.pedidoSeleccionado.id,
+        const respuesta = await fetch(url_api+"/tasks/"+this.state.pedidoSeleccionado.id,
             {
             method:"delete",
             headers:{
@@ -66,8 +66,9 @@ class Pedidos extends Component{
     }
 
     async getPedidos(){
-        const url = 'https://proyecto-tpi-backend-production.up.railway.app/'
-        const respuesta = await fetch(url+"/tasks",{
+
+        const url_api = 'https://proyecto-tpi-backend-production.up.railway.app/api/v1'
+        const respuesta = await fetch(url_api+"/tasks",{
             method:'get',
             headers:{
                 "api":"78b96cea5c47cf11ae257dd16dd09e809f5bb205c29db1fdde1a33bede7e873b",
