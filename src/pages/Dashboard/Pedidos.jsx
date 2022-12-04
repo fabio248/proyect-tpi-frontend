@@ -50,7 +50,9 @@ class Pedidos extends Component{
 
 
     async borrarPedido(){
+        this.actualizarTablaDePedidos()
         const url_api = 'https://proyecto-tpi-backend-production.up.railway.app/api/v1'
+
 
         const respuesta = await fetch(url_api+"/tasks/"+this.state.pedidoSeleccionado.id,
             {
@@ -62,7 +64,7 @@ class Pedidos extends Component{
         })
 
         this.actualizarEstado({},false,false,undefined)
-        this.actualizarTablaDePedidos()
+
     }
 
     async getPedidos(){
@@ -95,7 +97,7 @@ class Pedidos extends Component{
     }
 
     abrirModalBorrarPedido(pedidoSeleccionado){
-        this.actualizarEstado(this.state.pedidos,this.state.hayDatos,true,pedidoSeleccionado)
+        this.actualizarEstado(this.state.pedidos,this.state.hayDatos,true,false,pedidoSeleccionado)
     }
 
     cerrarModalBorrarPedido(){
