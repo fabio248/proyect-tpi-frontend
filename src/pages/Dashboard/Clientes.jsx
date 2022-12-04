@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import { CircularProgress, Button, Box, IconButton, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip, InputLabel, MenuItem } from "@mui/material";
 import { Visibility, Update, Delete, Add, Send } from "@mui/icons-material";
 import { FormControl, TextField, Select, Dialog, DialogContent, DialogContentText, DialogTitle, DialogActions} from "@mui/material";
@@ -97,7 +97,6 @@ class Clientes extends Component {
 
         if(!(this.state.pedido === "") && dayjs(this.state.fecha).isValid()) {
             fetch("https://proyecto-tpi.onrender.com/api/v1/tasks", {
-                mode: "no-cors",
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -106,7 +105,7 @@ class Clientes extends Component {
                 },
                 body: {
                     "clienteId":  this.state.clienteSeleccionado.id,
-                    "fechaEntrega": this.state.fecha,
+                    "fechaEntrega": dayjs().utc(this.state.fecha),
                     "type": this.state.pedido,
                 }
             }).then(async response => {
