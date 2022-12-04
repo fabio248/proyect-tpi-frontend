@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 import { CircularProgress, Button, Box, IconButton, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip, InputLabel, MenuItem } from "@mui/material";
 import { Visibility, Update, Delete, Add, Send } from "@mui/icons-material";
 import { FormControl, TextField, Select, Dialog, DialogContent, DialogContentText, DialogTitle, DialogActions} from "@mui/material";
@@ -107,7 +107,7 @@ class Clientes extends Component {
                 method: "POST",
                 headers:{
                     "Content-Type": "application/json",
-                    "api":"8b96cea5c47cf11ae257dd16dd09e809f5bb205c29db1fdde1a33bede7e873b",
+                    "api":"78b96cea5c47cf11ae257dd16dd09e809f5bb205c29db1fdde1a33bede7e873b",
                     "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMmJlN2MwZS01Mjc1LTQyNjEtYmZiMC1jMDcxYWE4NGI1NTIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2NjkzNDAzNDd9.yh76A2ekWXODxuAIdsRmdtB9KOr4kdFGtULH9QWlQR8"
                 },
                 body: JSON.stringify(cuerpo)
@@ -364,6 +364,7 @@ class Clientes extends Component {
                                                 <InputLabel id="fecha_entrega">Tipo de Prenda</InputLabel>
                                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                                                     <DesktopDatePicker
+                                                        className="w-100"
                                                         disablePast={true}
                                                         labelId="fecha_entrega"
                                                         label="Fecha de Entrega"
