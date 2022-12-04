@@ -364,6 +364,7 @@ class Clientes extends Component {
                                                 <InputLabel id="fecha_entrega">Tipo de Prenda</InputLabel>
                                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                                                     <DesktopDatePicker
+                                                        className="w-100"
                                                         disablePast={true}
                                                         labelId="fecha_entrega"
                                                         label="Fecha de Entrega"
