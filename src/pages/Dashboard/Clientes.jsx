@@ -39,7 +39,7 @@ class Clientes extends Component {
 
     // Obtiene los clientes
     async getClientes() {
-        fetch("https://proyecto-tpi.onrender.com/api/v1/clients", {
+        fetch("https://proyecto-tpi-backend-production.up.railway.app/api/v1/clients", {
             method:"GET",
             headers: {
                 "Content-Type": "application/json",
@@ -96,7 +96,7 @@ class Clientes extends Component {
     async agregarPedido() {
 
         if(!(this.state.pedido === "") && dayjs(this.state.fecha).isValid()) {
-            fetch("https://proyecto-tpi.onrender.com/api/v1/tasks", {
+            fetch("https://proyecto-tpi-backend-production.up.railway.app/api/v1/tasks", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -105,7 +105,7 @@ class Clientes extends Component {
                 },
                 body: {
                     "clienteId":  this.state.clienteSeleccionado.id,
-                    "fechaEntrega": dayjs().utc(this.state.fecha),
+                    "fechaEntrega": new Date(this.state.fecha).toISOString(),
                     "type": this.state.pedido,
                 }
             }).then(async response => {
@@ -135,7 +135,7 @@ class Clientes extends Component {
         }
     }
 
-    abrirAgregarPedido(cliente) {
+    abrirAgregarPedido(cliente) { 
         this.setState({
             estadoModalPedido:true,
             clienteSeleccionado:cliente,
