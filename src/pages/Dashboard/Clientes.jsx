@@ -105,6 +105,7 @@ class Clientes extends Component {
             fetch("https://proyecto-tpi-backend-production.up.railway.app/api/v1/tasks", {
                 method: "POST",
                 headers:{
+                    "Content-Type": "application/json",
                     "api":"78b96cea5c47cf11ae257dd16dd09e809f5bb205c29db1fdde1a33bede7e873b",
                     "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMmJlN2MwZS01Mjc1LTQyNjEtYmZiMC1jMDcxYWE4NGI1NTIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2NjkzNDAzNDd9.yh76A2ekWXODxuAIdsRmdtB9KOr4kdFGtULH9QWlQR8"
                 },
@@ -117,10 +118,6 @@ class Clientes extends Component {
                     const error = (data && data.message) || response.statusText;
                     return Promise.reject(error);
                 }
-                this.setState({ 
-                    clientes:data,
-                    nulo:false,
-                })
             }).catch(error => {
                 this.setState({ 
                     mensajeError:error.toString(),
