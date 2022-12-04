@@ -23,6 +23,7 @@ import DialogActions from "@mui/material/DialogActions";
 
 class Pedidos extends Component{
 
+
     constructor(props) {
         super(props);
 
@@ -49,8 +50,9 @@ class Pedidos extends Component{
 
 
     async borrarPedido(){
+    const url = 'https://proyecto-tpi-backend-production.up.railway.app/'
 
-        const respuesta = await fetch("https://proyecto-tpi.onrender.com/api/v1/tasks/"+this.state.pedidoSeleccionado.id,
+        const respuesta = await fetch(url+"/tasks/"+this.state.pedidoSeleccionado.id,
             {
             method:"delete",
             headers:{
@@ -64,8 +66,8 @@ class Pedidos extends Component{
     }
 
     async getPedidos(){
-
-        const respuesta = await fetch("https://proyecto-tpi.onrender.com/api/v1/tasks",{
+        const url = 'https://proyecto-tpi-backend-production.up.railway.app/'
+        const respuesta = await fetch(url+"/tasks",{
             method:'get',
             headers:{
                 "api":"78b96cea5c47cf11ae257dd16dd09e809f5bb205c29db1fdde1a33bede7e873b",
