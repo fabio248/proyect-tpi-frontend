@@ -52,7 +52,7 @@ class Login extends Component {
     };
 
     const body = JSON.stringify(cuerpo);
-    const url = `https://proyecto-tpi.onrender.com/api/v1/auth/login`;
+    const url = `https://proyecto-tpi-backend-production.up.railway.app/api/v1/login`;
     event.preventDefault();
 
     this.autenticarUsuario(url, body)
@@ -160,7 +160,10 @@ class Login extends Component {
                             onClick={this.esAutenticado}
                           >
                             {this.state.seAutentico ? (
-                              <CircularProgress color={"inherit"} size={"1rem"}/>
+                              <CircularProgress
+                                color={'inherit'}
+                                size={'1rem'}
+                              />
                             ) : (
                               'Iniciar Sesión.'
                             )}

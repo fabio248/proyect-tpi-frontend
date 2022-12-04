@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { URL_API } from './config';
 export default class Auth {
-  endpoint = 'https://proyecto-tpi.onrender.com/api/v1/auth';
+  endpoint = `${URL_API}/auth`;
   headers = {
     'Content-Type': 'application/json',
     api: '78b96cea5c47cf11ae257dd16dd09e809f5bb205c29db1fdde1a33bede7e873b',
