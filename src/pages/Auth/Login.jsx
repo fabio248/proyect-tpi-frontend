@@ -52,7 +52,7 @@ class Login extends Component {
     };
 
     const body = JSON.stringify(cuerpo);
-    const url = `https://proyecto-tpi.onrender.com/api/v1/auth/login`;
+    const url = `https://proyecto-tpi-backend-production.up.railway.app/auth/login`;
     event.preventDefault();
 
     this.autenticarUsuario(url, body)
