@@ -33,14 +33,12 @@ class Pedidos extends Component{
             pedidos: {},
             hayDatos:false,
             modalBorrarAbierto:false,
-            modalActualizarAbierto:false,
             pedidoSeleccionado: {}
         }
 
         this.abrirModalBorrarPedido = this.abrirModalBorrarPedido.bind(this)
         this.cerrarModalBorrarPedido = this.cerrarModalBorrarPedido.bind(this)
-        this.abrirModalActualizarPedido = this.abrirModalActualizarPedido.bind(this)
-        this.cerrarModalActualizarPedido = this.cerrarModalActualizarPedido.bind(this)
+
         this.borrarPedido = this.borrarPedido.bind(this)
         this.actualizarEstado = this.actualizarEstado.bind(this)
     }
@@ -82,7 +80,29 @@ class Pedidos extends Component{
 
         respuesta.json()
             .then(
-                value => {this.actualizarEstado(value,true,false,false,undefined)}
+                pedidos => {
+                    const getClientes = async (valor) =>{
+
+                        for(let ped of valor){
+                            (await fetch("https://proyecto-tpi-backend-production.up.railway.app/api/v1/clients/" + ped.clienteId,
+                                {
+                                    method: "get",
+                                    headers: {
+                                        "api": "78b96cea5c47cf11ae257dd16dd09e809f5bb205c29db1fdde1a33bede7e873b",
+                                        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMmJlN2MwZS01Mjc1LTQyNjEtYmZiMC1jMDcxYWE4NGI1NTIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2NjkzNDAzNDd9.yh76A2ekWXODxuAIdsRmdtB9KOr4kdFGtULH9QWlQR8"
+                                    }
+                                })).json().then(cliente => {
+
+                                    ped.cliente = cliente
+                                    this.actualizarEstado(pedidos,true,false,undefined)
+                                })
+                        }
+                    }
+
+                    getClientes(pedidos)
+
+
+                }
             )
 
 
@@ -90,12 +110,19 @@ class Pedidos extends Component{
     }
 
 
-    actualizarEstado(pedidos,existenDatos,modalBorrarPedidoEstaAbierto,modalActualizarPedidoEstaAbierto,pedidoSeleccionado,clienteSeleccionado){
+    actualizarEstado(pedidos,existenDatos,modalBorrarPedidoEstaAbierto,pedidoSeleccionado){
 
 
+        this.setState({
+            pedidos: pedidos,
+            hayDatos: existenDatos,
+            modalBorrarAbierto: modalBorrarPedidoEstaAbierto,
+            pedidoSeleccionado: pedidoSeleccionado
+        })
 
-        /* No sirveeeeeee
+/*
         let respuesta = pedidos.map(async (pedido) => {
+
             const respuesta  = (await fetch("https://proyecto-tpi-backend-production.up.railway.app/api/v1/clients/" + pedido.clienteId,
                 {
                     method: "get",
@@ -103,7 +130,8 @@ class Pedidos extends Component{
                         "api": "78b96cea5c47cf11ae257dd16dd09e809f5bb205c29db1fdde1a33bede7e873b",
                         "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMmJlN2MwZS01Mjc1LTQyNjEtYmZiMC1jMDcxYWE4NGI1NTIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2NjkzNDAzNDd9.yh76A2ekWXODxuAIdsRmdtB9KOr4kdFGtULH9QWlQR8"
                     }
-                })).json().then((clienteSolicitado)=> {
+                })).json().then((clienteSolicitado) => {
+
                     pedido.cliente = clienteSolicitado
                 }
             ).finally(()=>{
@@ -115,56 +143,29 @@ class Pedidos extends Component{
                     pedidoSeleccionado:pedidoSeleccionado,
                     clienteSeleccionado:clienteSeleccionado
                 })
-
-
-
-
-
             })
         })
-        */
 
 
-        this.setState( {
-            pedidos:pedidos,
-            hayDatos: existenDatos,
-            modalBorrarAbierto: modalBorrarPedidoEstaAbierto,
-            modalActualizarAbierto:modalActualizarPedidoEstaAbierto,
-            pedidoSeleccionado:pedidoSeleccionado,
-            clienteSeleccionado:clienteSeleccionado
-        })
-
+*/
     }
+
 
 
 
 
     abrirModalBorrarPedido(pedidoSeleccionado){
-        this.actualizarEstado(this.state.pedidos,this.state.hayDatos,true,false,pedidoSeleccionado,undefined)
+
+        this.actualizarEstado(this.state.pedidos,this.state.hayDatos,true,pedidoSeleccionado)
     }
 
     cerrarModalBorrarPedido(){
-        this.actualizarEstado(this.state.pedidos,this.state.hayDatos,false,false,this.state.pedidoSeleccionado,undefined)
+        this.actualizarEstado(this.state.pedidos,this.state.hayDatos,false,undefined)
     }
 
-    async abrirModalActualizarPedido(pedidoSeleccionado){
-        const url_api = 'https://proyecto-tpi-backend-production.up.railway.app/api/v1'
-        const respuesta = await fetch(url_api+'/clients/'+pedidoSeleccionado.clienteId,{
-            method:"get",
-            headers:{
-                "api":"78b96cea5c47cf11ae257dd16dd09e809f5bb205c29db1fdde1a33bede7e873b",
-                "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMmJlN2MwZS01Mjc1LTQyNjEtYmZiMC1jMDcxYWE4NGI1NTIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2NjkzNDAzNDd9.yh76A2ekWXODxuAIdsRmdtB9KOr4kdFGtULH9QWlQR8"
-            }
-        })
 
-        const clienteSeleccionado = await respuesta.json()
 
-        this.actualizarEstado(this.state.pedidos,this.state.hayDatos,false,true,pedidoSeleccionado,clienteSeleccionado)
-    }
 
-    cerrarModalActualizarPedido(){
-        this.actualizarEstado(this.state.pedidos,this.state.hayDatos,false,false,undefined,undefined)
-    }
 
     render() {
 
@@ -206,7 +207,9 @@ class Pedidos extends Component{
                     <Table>
                         <TableHead>
                             <TableRow >
-
+                                <TableCell>
+                                    Cliente
+                                </TableCell>
                                 <TableCell align={"center"}>
                                     Tipo
                                 </TableCell>
@@ -226,7 +229,7 @@ class Pedidos extends Component{
                                 this.state.pedidos.map(
                                      (fila) => {
 
-
+                                         console.log(fila)
                                         return <>
 
                                             <TableRow key={fila.id} >

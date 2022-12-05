@@ -317,7 +317,7 @@ class Clientes extends Component {
                                                             <IconButton
                                                                 size={"small"}
                                                                 color={"warning"}
-                                                                onClick={this.update()}
+                                                                onClick={()=>{window.location.href += "/"+cliente.id} }
                                                             >
                                                                 <Update />
                                                             </IconButton>
