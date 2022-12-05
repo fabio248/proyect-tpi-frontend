@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import dayjs from 'dayjs';
-import { CircularProgress, Button, Box, IconButton, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip, InputLabel, MenuItem } from "@mui/material";
+import { CircularProgress, Button, Box, IconButton, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip, InputLabel, Input, MenuItem, OutlinedInput } from "@mui/material";
 import { Visibility, Update, Delete, Add, Send } from "@mui/icons-material";
 import { FormControl, TextField, Select, Dialog, DialogContent, DialogContentText, DialogTitle, DialogActions} from "@mui/material";
 import { DesktopDatePicker, LocalizationProvider } from '@mui/x-date-pickers';
@@ -8,6 +8,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import AlertError from '../../components/AlertError';
 
 class Clientes extends Component {
+
 
     constructor(props) {
         super(props);
@@ -31,6 +32,8 @@ class Clientes extends Component {
             // {Agregar Pedido}
         };
     }
+
+    
 
     /* ----------------------------------------------------------- *
         BLOQUE DE CODIGO: CLIENTES.
@@ -190,6 +193,7 @@ class Clientes extends Component {
             pedido:tipoPedido,
         });
     }
+
     /* ----------------------------------------------------------- *
         FIN DEL BLOQUE DE CODIGO
     * ------------------------------------------------------------ */

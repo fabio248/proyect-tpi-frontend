@@ -11,6 +11,7 @@ import Usuarios from './pages/Dashboard/Users';
 import ChangePassword from './pages/Auth/ChangePassword';
 import ForgotPassword from './pages/Auth/ForgotPassword';
 import Pedidos from './pages/Dashboard/Pedidos';
+import Actualizar from './pages/Auth/Actualizar';
 
 const validateRole = () => {
   const user = JSON.parse(localStorage.getItem('user'));
