@@ -23,7 +23,7 @@ class Clientes extends Component {
             // Clientes.jsx {Agregar Pedido}
             error:false,
             mensajeError:"",
-            fecha: dayjs(),
+            fecha: dayjs().format("DD/MM/YYYY"),
             pedido:"",
             estadoModalPedido:false,
             clienteSeleccionado:{},
@@ -245,7 +245,7 @@ class Clientes extends Component {
                                 {this.state.clientes.map(
                                     (cliente) => {
                                         return <React.Fragment>
-                                            <TableRow key={cliente.id}>
+                                            <TableRow>
                                                 <TableCell>
                                                     {cliente.firstName} {cliente.secondName}
                                                 </TableCell>
@@ -366,6 +366,7 @@ class Clientes extends Component {
                                                     <DesktopDatePicker
                                                         className="w-100"
                                                         disablePast={true}
+                                                        inputFormat="DD/MM/YYYY"
                                                         labelId="fecha_entrega"
                                                         label="Fecha de Entrega"
                                                         openTo="month"
