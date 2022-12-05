@@ -69,41 +69,43 @@ class Pedidos extends Component{
 
     async getPedidos(){
 
+        let pedidos= {}
+
         const url_api = 'https://proyecto-tpi-backend-production.up.railway.app/api/v1'
-        const respuesta = await fetch(url_api+"/tasks",{
-            method:'get',
-            headers:{
-                "api":"78b96cea5c47cf11ae257dd16dd09e809f5bb205c29db1fdde1a33bede7e873b",
-                "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMmJlN2MwZS01Mjc1LTQyNjEtYmZiMC1jMDcxYWE4NGI1NTIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2NjkzNDAzNDd9.yh76A2ekWXODxuAIdsRmdtB9KOr4kdFGtULH9QWlQR8"
+        const respuesta = await fetch(url_api + "/tasks", {
+            method: 'get',
+            headers: {
+                "api": "78b96cea5c47cf11ae257dd16dd09e809f5bb205c29db1fdde1a33bede7e873b",
+                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMmJlN2MwZS01Mjc1LTQyNjEtYmZiMC1jMDcxYWE4NGI1NTIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2NjkzNDAzNDd9.yh76A2ekWXODxuAIdsRmdtB9KOr4kdFGtULH9QWlQR8"
             }
+        }).then(value => {return value})
+
+        const pedidosPromises = respuesta.json().then(arrayPedidos =>{
+            pedidos =  arrayPedidos
+            const arrayClientes = arrayPedidos.map(pedido => {
+                                    const clienteDelPedido =  fetch(url_api+"/clients/"+pedido.clienteId,{
+                                        method:"get",
+                                        headers: {
+                                            "api": "78b96cea5c47cf11ae257dd16dd09e809f5bb205c29db1fdde1a33bede7e873b",
+                                            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMmJlN2MwZS01Mjc1LTQyNjEtYmZiMC1jMDcxYWE4NGI1NTIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2NjkzNDAzNDd9.yh76A2ekWXODxuAIdsRmdtB9KOr4kdFGtULH9QWlQR8"
+                                        }
+                                    }).then(cliente => {return cliente.json()})
+                                    return clienteDelPedido
+                                    })
+
+            return Promise.all(arrayClientes)
         })
 
-        respuesta.json()
-            .then(
-                pedidos => {
-                    const getClientes = async (valor) =>{
+        pedidosPromises.then(clientes => {
 
-                        for(let ped of valor){
-                            (await fetch("https://proyecto-tpi-backend-production.up.railway.app/api/v1/clients/" + ped.clienteId,
-                                {
-                                    method: "get",
-                                    headers: {
-                                        "api": "78b96cea5c47cf11ae257dd16dd09e809f5bb205c29db1fdde1a33bede7e873b",
-                                        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMmJlN2MwZS01Mjc1LTQyNjEtYmZiMC1jMDcxYWE4NGI1NTIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2NjkzNDAzNDd9.yh76A2ekWXODxuAIdsRmdtB9KOr4kdFGtULH9QWlQR8"
-                                    }
-                                })).json().then(cliente => {
+            for(let i = 0; i< clientes.length;i++){
+                pedidos[i].cliente = clientes[i]
 
-                                    ped.cliente = cliente
-                                    this.actualizarEstado(pedidos,true,false,undefined)
-                                })
-                        }
-                    }
-
-                    getClientes(pedidos)
+            }
+        }).finally(() => { this.actualizarEstado(pedidos,true,false,undefined) })
 
 
-                }
-            )
+
 
 
 
@@ -229,11 +231,13 @@ class Pedidos extends Component{
                                 this.state.pedidos.map(
                                      (fila) => {
 
-                                         console.log(fila)
+
                                         return <>
 
                                             <TableRow key={fila.id} >
-
+                                                <TableCell>
+                                                    {fila.cliente.firstName+" "+fila.cliente.firstLastName}
+                                                </TableCell>
                                                 <TableCell align={"center"}>
                                                     {fila.type}
                                                 </TableCell>
