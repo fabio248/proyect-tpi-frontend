@@ -27,6 +27,7 @@ class Clientes extends Component {
             pedido:"",
             estadoModalPedido:false,
             clienteSeleccionado:{},
+            estadoModalCliente:false,
             // {Agregar Pedido}
         };
     }
@@ -65,7 +66,23 @@ class Clientes extends Component {
             });
         });
     }
-
+    async borrarclientes(id){
+        fetch("https://proyecto-tpi-backend-production.up.railway.app/api/v1/clients/"+id,
+                   {
+                   method:"delete",
+                   headers:{
+                       "api":"78b96cea5c47cf11ae257dd16dd09e809f5bb205c29db1fdde1a33bede7e873b",
+                       "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMmJlN2MwZS01Mjc1LTQyNjEtYmZiMC1jMDcxYWE4NGI1NTIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2NjkzNDAzNDd9.yh76A2ekWXODxuAIdsRmdtB9KOr4kdFGtULH9QWlQR8"
+                   }
+               }).then (data=>{
+                   this.setState({
+                       cliente :data,
+                       nulo:false,
+                   })
+                   this.updateTable()
+               })
+           
+           }
     add() {
 
     }
@@ -143,6 +160,12 @@ class Clientes extends Component {
             fecha: dayjs(),
         });
     }
+    abrircliente(cliente) {
+        this.setState({
+            estadoModalCliente:true,
+            clienteSeleccionado:cliente,
+        });
+    }
 
     cerrarAgregarPedido() {
         this.setState({
@@ -150,7 +173,12 @@ class Clientes extends Component {
             pedido:"",
         });
     }
-
+    cerrarCliente() {
+        this.setState({
+            estadoModalCliente:false,
+        
+        });
+    }
     fechaAgregarPedido(nuevaFecha) {
         this.setState({
             fecha:nuevaFecha,
@@ -276,7 +304,7 @@ class Clientes extends Component {
                                                             <IconButton
                                                                 size={"small"}
                                                                 color={"primary"}
-                                                                onClick={this.view()}
+                                                                onClick={()=>this.abrircliente(cliente)}
                                                             >
                                                                 <Visibility />
                                                             </IconButton>
@@ -294,7 +322,7 @@ class Clientes extends Component {
                                                             <IconButton
                                                                 size={"small"}
                                                                 color={"error"}
-                                                                onClick={this.delete()}
+                                                                onClick={()=>this.borrarclientes(cliente.id)}
                                                             >
                                                                 <Delete />
                                                             </IconButton>
@@ -386,7 +414,34 @@ class Clientes extends Component {
                                 <Button variant="contained" endIcon={<Send />} color="success" onClick={() => this.agregarPedido()}>Enviar</Button>
                             </DialogActions>
                         </Dialog>
-                    )}
+                    )}{!this.state.nulo && (
+                        <Dialog open={this.state.estadoModalCliente} onClose={() => this.cerrarCliente()}  aria-describedby="Cliente">
+                        <DialogTitle className="text-center text-uppercase">Datos Personales del cliente </DialogTitle>
+                        <DialogContent>
+                                <Box className="p-1 m-2">
+                                    <DialogContentText>
+                                        <div className="mb-1 p-1">
+                                            <p className="primary"><strong>Datos del Cliente</strong></p>
+                                        </div>
+                                    </DialogContentText>
+                                    <DialogContentText id="" color="black">
+                                        <div className="mb-1 p-1">
+                                            <p className="primary"><strong>ID:</strong> {this.state.clienteSeleccionado.id}</p>
+                                            <p className="primary"><strong >Fecha de Registro:</strong> <datetime>{this.state.clienteSeleccionado.createdAt}</datetime></p>
+                                            <p className="primary"><strong>Nombres:</strong> {this.state.clienteSeleccionado.firstName} {this.state.clienteSeleccionado.secondName}</p>
+                                            <p className="primary"><strong>Apellidos:</strong> {this.state.clienteSeleccionado.firstLastName} {this.state.clienteSeleccionado.secondLastName}</p>
+                                            <p className="primary"><strong>Género:</strong> {this.state.clienteSeleccionado.gender}</p>
+                                            <p className="primary"><strong>Email:</strong> {this.state.clienteSeleccionado.email}</p>
+                                            <p className="primary"><strong>Telefono:</strong> {this.state.clienteSeleccionado.phone}</p>
+                                        </div>
+                                    </DialogContentText>
+                                    </Box>
+                                </DialogContent>
+                                <DialogActions>
+                            <Button variant="contained" color="primary" onClick={() => this.cerrarCliente()}>Salir</Button>
+                        </DialogActions>
+                                </Dialog>
+                            )}
                 </React.Fragment>
             )
         }
