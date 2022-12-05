@@ -69,6 +69,14 @@ function App() {
             </RequireAuth>
           }
         ></Route>
+        <Route 
+          path='/dashboard-admin/clientes/:idCliente'
+          element={
+            <Dashboard>
+              <Actualizar />
+            </Dashboard>
+          }
+        ></Route>
       </Routes>
     </BrowserRouter>
   );

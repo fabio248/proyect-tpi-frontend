@@ -10,11 +10,12 @@ const url = "https://proyecto-tpi-backend-production.up.railway.app/api/v1"
 
 
 function Actualizar() {
-  let clienteId = useParams();
+  let {clienteId} = useParams();
   const [datos, setDatos] = useState("");
 
   const urlGet = url + "/clientes/" + clienteId;
   const getParams = {
+    method:"GET",
     headers:{
       Authorization: AuthStr,
       API:token,
@@ -22,12 +23,7 @@ function Actualizar() {
   }
 
   axios
-  .get(urlGet, {
-    headers: {
-      API: token,
-      Authorization: AuthStr,
-    },
-  })
+  .get(urlGet, getParams)
   .then((response) => {
     // If request is good...
     console.log(response.data);
