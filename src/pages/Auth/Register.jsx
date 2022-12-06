@@ -4,7 +4,8 @@ import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 
 function Register() {
-  const urlClientes = "https://proyecto-tpi-backend-production.up.railway.app/api/v1/clients";
+  const urlClientes =
+    "https://proyecto-tpi-backend-production.up.railway.app/api/v1/clients";
   const AuthStr =
     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmNDE1ZjhhZi0zMDBhLTRkYzQtODk0Zi1hNmQyY2E2ZThkMTAiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2Njk1MDExNDN9.IEsb0DhL-2QFH3C5fnPrlKxcFImJdrn3vqm9RC0J3G0";
 
@@ -924,12 +925,23 @@ function Register() {
             </div>
           </div>
         )}
-        <input
-          type="submit"
-          value="Registrar"
-          className="btn btn-primary btn-lg"
-          style={{ float: "right", marginRight: "20%" }}
-        />
+        <div className="mt-5 d-flex flex-col" style={{float: "right",}}>
+          <button
+            className="mx-3 btn-lg btn-danger"
+            onClick={(e) => {
+              e.preventDefault();
+              location.href = "/dashboard-admin/clientes";
+            }}
+          >
+            Cancelar
+          </button>
+          <input
+            type="submit"
+            value="Registrar"
+            className="btn btn-primary btn-lg"
+            style={{ marginRight: "20%" }}
+          />
+        </div>
       </form>
     </div>
   );

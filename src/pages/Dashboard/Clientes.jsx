@@ -244,7 +244,10 @@ class Clientes extends Component {
                             </h3>
                         </div>
                         <div className="container m-1 p-1">
-                            <Button variant="contained" color="success">
+                            <Button onClick={(e) => {
+                                e.preventDefault();
+                                location.href = "/register";
+                            }} variant="contained" color="success">
                                 Agregar Cliente
                             </Button>
                         </div>
