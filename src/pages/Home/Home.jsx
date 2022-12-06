@@ -1,5 +1,22 @@
 import React from 'react';
 import '../../css/styles.css';
+
+import navbar_logo from '../../assets/img/navbar-logo.png'; 
+import about from '../../assets/img/about/4.jpg';
+import close_icon from '../../assets/img/close-icon.svg';
+
+import service1 from '../../assets/img/services/1.jpg';
+import service2 from '../../assets/img/services/2.jpg';
+import service3 from '../../assets/img/services/3.jpg';
+
+import portafolio1 from '../../assets/img/portfolio/1.jpg';
+import portafolio2 from '../../assets/img/portfolio/2.jpg';
+import portafolio3 from '../../assets/img/portfolio/3.jpg';
+import portafolio4 from '../../assets/img/portfolio/4.jpg';
+import portafolio5 from '../../assets/img/portfolio/5.jpg';
+import portafolio6 from '../../assets/img/portfolio/6.jpg';
+
+
 function Home() {
   return (
     <React.Fragment>
@@ -10,7 +27,7 @@ function Home() {
         >
           <div className='container'>
             <a className='navbar-brand' href='#page-top'>
-              <img src='/src/assets/img/navbar-logo.png' alt='...' />
+              <img src={navbar_logo} alt='...' />
             </a>
             <button
               className='navbar-toggler'
@@ -58,7 +75,7 @@ function Home() {
             <div className='masthead-subheading'>
               <img
                 className='w-25 h-25'
-                src='/src/assets/img/logo.svg'
+                src='i'
                 alt='...'
               />
             </div>
@@ -85,7 +102,7 @@ function Home() {
               <div className='col-md-4'>
                 <img
                   className='img-fluid'
-                  src='/src/assets/img/services/1.jpg'
+                  src={service1}
                 />
                 <h4 className='my-3'>Diseño de Prendas</h4>
                 <p className='text-muted'>
@@ -96,7 +113,7 @@ function Home() {
               <div className='col-md-4'>
                 <img
                   className='img-fluid'
-                  src='/src/assets/img/services/2.jpg'
+                  src={service2}
                 />
                 <h4 className='my-3'>Reparación de Prendas</h4>
                 <p className='text-muted'>
@@ -107,7 +124,7 @@ function Home() {
               <div className='col-md-4'>
                 <img
                   className='img-fluid'
-                  src='/src/assets/img/services/3.jpg'
+                  src={service3}
                 />
                 <h4 className='my-3'>Limpieza de Prendas</h4>
                 <p className='text-muted'>
@@ -141,7 +158,7 @@ function Home() {
                     </div>
                     <img
                       className='img-fluid'
-                      src='/src/assets/img/portfolio/1.jpg'
+                      src={portafolio1}
                       alt='...'
                     />
                   </a>
@@ -169,7 +186,7 @@ function Home() {
                     </div>
                     <img
                       className='img-fluid'
-                      src='/src/assets/img/portfolio/2.jpg'
+                      src={portafolio2}
                       alt='...'
                     />
                   </a>
@@ -197,7 +214,7 @@ function Home() {
                     </div>
                     <img
                       className='img-fluid'
-                      src='/src/assets/img/portfolio/3.jpg'
+                      src={portafolio3}
                       alt='...'
                     />
                   </a>
@@ -225,7 +242,7 @@ function Home() {
                     </div>
                     <img
                       className='img-fluid'
-                      src='/src/assets/img/portfolio/4.jpg'
+                      src={portafolio4}
                       alt='...'
                     />
                   </a>
@@ -253,7 +270,7 @@ function Home() {
                     </div>
                     <img
                       className='img-fluid'
-                      src='/src/assets/img/portfolio/5.jpg'
+                      src={portafolio5}
                       alt='...'
                     />
                   </a>
@@ -281,7 +298,7 @@ function Home() {
                     </div>
                     <img
                       className='img-fluid'
-                      src='/src/assets/img/portfolio/6.jpg'
+                      src={portafolio6}
                       alt='...'
                     />
                   </a>
@@ -311,7 +328,7 @@ function Home() {
                 <div className='timeline-image'>
                   <img
                     className='rounded-circle img-fluid'
-                    src='/src/assets/img/about/4.jpg'
+                    src={about}
                     alt='...'
                   />
                 </div>
@@ -350,7 +367,7 @@ function Home() {
           <div className='container'>
             <div className='text-center'>
               <h2 className='section-heading text-uppercase'>Contáctanos</h2>
-              <h3 className='section-subheading text-white'>
+              <h3 className='section-heading'>
                 ¿Tienes alguna sugerencia o petición?
               </h3>
             </div>
@@ -435,7 +452,6 @@ function Home() {
                   </div>
                   <br />
                   <a href='https://startbootstrap.com/solution/contact-forms'>
-                    https://startbootstrap.com/solution/contact-forms
                   </a>
                 </div>
               </div>
@@ -467,7 +483,7 @@ function Home() {
           <div className='modal-dialog'>
             <div className='modal-content'>
               <div className='close-modal' data-bs-dismiss='modal'>
-                <img src='/src/assets/img/close-icon.svg' alt='Close modal' />
+                <img src={close_icon} alt='Close modal' />
               </div>
               <div className='container'>
                 <div className='row justify-content-center'>
@@ -479,7 +495,7 @@ function Home() {
                       <p className='item-intro text-muted'>Premium</p>
                       <img
                         className='img-fluid d-block mx-auto'
-                        src='/src/assets/img/portfolio/1.jpg'
+                        src={portafolio1}
                         alt='...'
                       />
                       <p>
@@ -524,7 +540,7 @@ function Home() {
           <div className='modal-dialog'>
             <div className='modal-content'>
               <div className='close-modal' data-bs-dismiss='modal'>
-                <img src='/src/assets/img/close-icon.svg' alt='Close modal' />
+                <img src={close_icon} alt='Close modal' />
               </div>
               <div className='container'>
                 <div className='row justify-content-center'>
@@ -536,7 +552,7 @@ function Home() {
                       </p>
                       <img
                         className='img-fluid d-block mx-auto'
-                        src='/src/assets/img/portfolio/2.jpg'
+                        src={portafolio2}
                         alt='...'
                       />
                       <p>
@@ -582,7 +598,7 @@ function Home() {
           <div className='modal-dialog'>
             <div className='modal-content'>
               <div className='close-modal' data-bs-dismiss='modal'>
-                <img src='/src/assets/img/close-icon.svg' alt='Close modal' />
+                <img src={close_icon} alt='Close modal' />
               </div>
               <div className='container'>
                 <div className='row justify-content-center'>
@@ -594,7 +610,7 @@ function Home() {
                       </p>
                       <img
                         className='img-fluid d-block mx-auto'
-                        src='/src/assets/img/portfolio/3.jpg'
+                        src={portafolio3}
                         alt='...'
                       />
                       <p>
@@ -640,7 +656,7 @@ function Home() {
           <div className='modal-dialog'>
             <div className='modal-content'>
               <div className='close-modal' data-bs-dismiss='modal'>
-                <img src='/src/assets/img/close-icon.svg' alt='Close modal' />
+                <img src={close_icon} alt='Close modal' />
               </div>
               <div className='container'>
                 <div className='row justify-content-center'>
@@ -653,7 +669,7 @@ function Home() {
                       </p>
                       <img
                         className='img-fluid d-block mx-auto'
-                        src='/src/assets/img/portfolio/4.jpg'
+                        src={portafolio4}
                         alt='...'
                       />
                       <p>
@@ -698,7 +714,7 @@ function Home() {
           <div className='modal-dialog'>
             <div className='modal-content'>
               <div className='close-modal' data-bs-dismiss='modal'>
-                <img src='/src/assets/img/close-icon.svg' alt='Close modal' />
+                <img src={close_icon} alt='Close modal' />
               </div>
               <div className='container'>
                 <div className='row justify-content-center'>
@@ -710,7 +726,7 @@ function Home() {
                       </p>
                       <img
                         className='img-fluid d-block mx-auto'
-                        src='/src/assets/img/portfolio/5.jpg'
+                        src={portafolio5}
                         alt='...'
                       />
                       <p>
@@ -756,7 +772,7 @@ function Home() {
           <div className='modal-dialog'>
             <div className='modal-content'>
               <div className='close-modal' data-bs-dismiss='modal'>
-                <img src='/src/assets/img/close-icon.svg' alt='Close modal' />
+                <img src={close_icon} alt='Close modal' />
               </div>
               <div className='container'>
                 <div className='row justify-content-center'>
@@ -768,7 +784,7 @@ function Home() {
                       </p>
                       <img
                         className='img-fluid d-block mx-auto'
-                        src='/src/assets/img/portfolio/6.jpg'
+                        src={portafolio6}
                         alt='...'
                       />
                       <p>

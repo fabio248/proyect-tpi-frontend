@@ -86,6 +86,20 @@ class Clientes extends Component {
                })
            
            }
+
+           preguntar(id){
+    
+            let eliminar = confirm("¿Está seguro que desea eliminar este cliente?")
+        
+            if(eliminar === true)
+            {
+                this.borrarclientes(id)
+            } else {
+                //No haga nada, o haga cualquier otra cosa menos eliminarlo
+              //  this.cerrarCliente()
+            }
+            }
+
     add() {
 
     }
@@ -329,7 +343,7 @@ class Clientes extends Component {
                                                             <IconButton
                                                                 size={"small"}
                                                                 color={"error"}
-                                                                onClick={()=>this.borrarclientes(cliente.id)}
+                                                                onClick={()=>this.preguntar(cliente.id)}
                                                             >
                                                                 <Delete />
                                                             </IconButton>
