@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
+import { Alert } from "@mui/material";
 
 function Register() {
   const urlClientes =
@@ -9,6 +10,7 @@ function Register() {
   const AuthStr =
     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmNDE1ZjhhZi0zMDBhLTRkYzQtODk0Zi1hNmQyY2E2ZThkMTAiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2Njk1MDExNDN9.IEsb0DhL-2QFH3C5fnPrlKxcFImJdrn3vqm9RC0J3G0";
 
+  const [alerta, setAlerta] = useState();
   let axiosConfig = {
     headers: {
       API: "78b96cea5c47cf11ae257dd16dd09e809f5bb205c29db1fdde1a33bede7e873b",
@@ -25,7 +27,7 @@ function Register() {
     getValues,
     setValue,
     reset,
-  } = useForm([]);
+  } = useForm({alerta:false},[]);
 
   const onSubmit = (data) => {
     if (medidas == "Masculino") {
@@ -78,6 +80,7 @@ function Register() {
   React.useEffect(() => {
     if (formState.isSubmitSuccessful) {
       reset();
+      setAlerta(true);
     }
   }, [formState, reset]);
 
@@ -941,6 +944,13 @@ function Register() {
             className="btn btn-primary btn-lg"
             style={{ marginRight: "20%" }}
           />
+        </div>
+        <div className="mt-5 d-flex flex-col">
+          {alerta && (
+            <Alert variant="outlined" severity="success" onClose={() => {setAlerta(false)}}>
+              <strong>Se registraron los datos correctamente</strong>
+            </Alert>
+          )}
         </div>
       </form>
     </div>
