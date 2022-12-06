@@ -1108,18 +1108,17 @@ function Actualizar() {
           ></input>
         </div>
 
-        {alerta && (
-          // <div class="alert alert-success" role="alert">
-          //   Se actualizaron los datos correctamente
-          // </div>
-          <Alert
-            variant="outlined"
-            severity="success"
-            style={{ marginTop: "10px" }}
-          >
-            <strong>Se actualizaron los datos correctamente</strong>
-          </Alert>
-        )}
+        <div className="mt-5 d-flex flex-col">
+          {alerta && (
+            <Alert
+              variant="outlined"
+              severity="success"
+              onClose={()=>{setAlerta(false)}}
+            >
+              <strong>Se actualizaron los datos correctamente</strong>
+            </Alert>
+          )}
+        </div>
       </form>
     </div>
   );
