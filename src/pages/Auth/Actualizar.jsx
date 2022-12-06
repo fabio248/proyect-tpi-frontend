@@ -1090,34 +1090,36 @@ function Actualizar() {
             </div>
           </div>
         )}
-        <Button size="large"
-          onClick={() => {
-            history.back();
-          }}
-          startIcon={<ArrowBack />}
-        >
-          Volver
-        </Button>
-        <input
-          type="submit"
-          value="Actualizar"
-          className="btn btn-primary btn-lg"
-          
-          style={{
-            float: "inherit",
-            marginRight: "10%",
-            marginBottom: "10px",
-            marginTop: "10px",
-          }}
-        ></input>
-        
-        <div className="mt-5 d-flex flex-col">
-          {alerta && (
-            <Alert variant="outlined" severity="success" onClose={() => {setAlerta(false)}}>
-              <strong>Se actualizaron los datos correctamente</strong>
-            </Alert>
-          )}
-        </div>        
+        <div className="mt-5 d-flex flex-col" style={{ float: "right" }}>
+          <button
+            className="mx-3 btn-lg btn-danger"
+            onClick={(e) => {
+              e.preventDefault();
+              location.href = "/dashboard-admin/clientes";
+            }}
+          >
+            Cancelar
+          </button>
+          <input
+            type="submit"
+            value="Actualizar"
+            className="btn btn-primary btn-lg"
+            style={{ marginRight: "5%" }}
+          ></input>
+        </div>
+
+        {alerta && (
+          // <div class="alert alert-success" role="alert">
+          //   Se actualizaron los datos correctamente
+          // </div>
+          <Alert
+            variant="outlined"
+            severity="success"
+            style={{ marginTop: "10px" }}
+          >
+            <strong>Se actualizaron los datos correctamente</strong>
+          </Alert>
+        )}
       </form>
     </div>
   );
