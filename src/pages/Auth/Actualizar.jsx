@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { get, useForm } from "react-hook-form";
 import { useFetcher, useParams } from "react-router-dom";
 import axios from "axios";
-import {Button} from "@mui/material";
-import {ArrowBack} from "@mui/icons-material";
+import { Alert, Button } from "@mui/material";
+import { ArrowBack } from "@mui/icons-material";
 
 function Actualizar() {
   //Autenticacion en backend
@@ -18,6 +18,7 @@ function Actualizar() {
   const { idCliente } = useParams();
   const [cliente, setCliente] = useState({});
   const [gender, setGender] = useState({ gender: "" });
+  const [alerta, setAlerta] = useState();
 
   const urlCliente = url + "/clients/" + idCliente;
 
@@ -41,6 +42,7 @@ function Actualizar() {
     {
       //Junto a reset, establece con los valores del cliente los campos
       defaultValues: cliente,
+      alerta: false,
     },
     []
   );
@@ -140,8 +142,10 @@ function Actualizar() {
     //Si el cliente es mujer
     else {
       //Urls para la actualizacion de informacion de las medidas de mujer
-      const urlActualizarPSuperiorMujer = url + "/medidas-mujer-superior/" + data.medidasParteSuperiorMujer.id;
-      const urlActualizarPInferiorMujer = url + "/medidas-mujer-inferior/" + data.medidasParteInferiorMujer.id;
+      const urlActualizarPSuperiorMujer =
+        url + "/medidas-mujer-superior/" + data.medidasParteSuperiorMujer.id;
+      const urlActualizarPInferiorMujer =
+        url + "/medidas-mujer-inferior/" + data.medidasParteInferiorMujer.id;
 
       //Informacion personal del cliente
       var postDataCliente = {
@@ -243,13 +247,17 @@ function Actualizar() {
       });
   }, [reset]);
 
+  React.useEffect(() => {
+    if (formState.isSubmitSuccessful) {
+      setAlerta(true);
+    }
+  });
+
   return (
     <div
       className="card p-5 shadow-lg p-3 mb-5 bg-white rounded"
       style={{ width: "70%", margin: "5rem auto" }}
     >
-
-      <Button onClick={()=>{history.back()}} startIcon={<ArrowBack/>}>Volver</Button>
       <h1 className="mb-5 text-center">Actualizar cliente</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form-group row mb-4">
@@ -1082,12 +1090,35 @@ function Actualizar() {
             </div>
           </div>
         )}
+        <Button size="large"
+          onClick={() => {
+            history.back();
+          }}
+          startIcon={<ArrowBack />}
+        >
+          Volver
+        </Button>
         <input
           type="submit"
           value="Actualizar"
           className="btn btn-primary btn-lg"
-          style={{ float: "inherit", marginRight: "5%" }}
+          
+          style={{
+            float: "inherit",
+            marginRight: "10%",
+            marginBottom: "10px",
+            marginTop: "10px",
+          }}
         ></input>
+
+        {alerta && (
+          // <div class="alert alert-success" role="alert">
+          //   Se actualizaron los datos correctamente
+          // </div>
+          <Alert variant="outlined" severity="success" style={{marginTop:'10px'}}>
+            <strong>Se actualizaron los datos correctamente</strong>
+          </Alert>
+        )}
       </form>
     </div>
   );
