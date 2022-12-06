@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { URL_API } from "../../api/config";
-import { CircularProgress } from "@mui/material";
+import {Button, CircularProgress} from "@mui/material";
+import {ArrowBack} from "@mui/icons-material";
 
 const api = "78b96cea5c47cf11ae257dd16dd09e809f5bb205c29db1fdde1a33bede7e873b";
 const token =
@@ -134,6 +135,7 @@ function ActualizarPedido() {
 
     x = (
       <>
+
         <h4 className="text-center text-muted">Datos del cliente</h4>
         <div className="p-1">
           <p>
@@ -233,6 +235,7 @@ function ActualizarPedido() {
       className="card p-5 shadow-lg p-3 mb-5 bg-white rounded"
       style={{ width: "70%", margin: "5rem auto" }}
     >
+      <Button onClick={()=>{history.back()}} startIcon={<ArrowBack/>}>Volver</Button>
       <h1 className="mb-5 text-center">Actualizar pedido</h1>
       {x}
     </div>

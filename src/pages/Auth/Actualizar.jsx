@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { get, useForm } from "react-hook-form";
 import { useFetcher, useParams } from "react-router-dom";
 import axios from "axios";
+import {Button} from "@mui/material";
+import {ArrowBack} from "@mui/icons-material";
 
 function Actualizar() {
   //Autenticacion en backend
@@ -246,6 +248,8 @@ function Actualizar() {
       className="card p-5 shadow-lg p-3 mb-5 bg-white rounded"
       style={{ width: "70%", margin: "5rem auto" }}
     >
+
+      <Button onClick={()=>{history.back()}} startIcon={<ArrowBack/>}>Volver</Button>
       <h1 className="mb-5 text-center">Actualizar cliente</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form-group row mb-4">
@@ -1082,7 +1086,7 @@ function Actualizar() {
           type="submit"
           value="Actualizar"
           className="btn btn-primary btn-lg"
-          style={{ float: "inherit", marginRight: "20%" }}
+          style={{ float: "inherit", marginRight: "5%" }}
         ></input>
       </form>
     </div>
